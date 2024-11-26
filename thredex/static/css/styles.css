@@ -1,0 +1,74 @@
+/* Custom CSS */
+body {
+    font-family: Arial, sans-serif;
+  }
+  
+  .hero-section {
+    background-color: #f9eae0;
+    text-align: center;
+    padding: 50px 20px;
+  }
+  
+  .hero-section h1 {
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+  
+  .hero-section img {
+    max-width: 100%;
+    height: auto;
+  }
+  
+  .category-section {
+    padding: 40px 0;
+    text-align: center;
+  }
+  
+  .category-section .category-card {
+    border: none;
+  }
+  
+  .category-section img {
+    height: 100px;
+    margin-bottom: 10px;
+  }
+  
+  .freelancer-card {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    text-align: center;
+  }
+  
+  .freelancer-card img {
+    border-radius: 50%;
+    width: 80px;
+    height: 80px;
+    margin-bottom: 10px;
+  }
+  
+  .subscribe-section {
+    background-color: #f9eae0;
+    padding: 30px 20px;
+    text-align: center;
+    margin-top: 40px;
+  }
+  
+  .footer {
+    background-color: #333;
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+  }
+  
+  .footer a {
+    color: #ff6b6b;
+    text-decoration: none;
+  }
+  
+  .footer a:hover {
+    color: #fff;
+  }
+
+

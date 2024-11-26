@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fc;
+            margin: 0;
+            padding: 0;
+        }
+        .login-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+        .login-card {
+            display: flex;
+            width: 100%;
+            max-width: 900px;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+        .left-section {
+            flex: 1;
+            background-color: #f4f6ff;
+            padding: 40px;
+            text-align: center;
+        }
+        .left-section h1 {
+            font-size: 32px;
+            color: #635dff;
+            font-weight: bold;
+        }
+        .left-section p {
+            margin-top: 10px;
+            font-size: 16px;
+            color: #6c757d;
+        }
+        .left-section img {
+            max-width: 100%;
+            height: auto;
+            margin-top: 20px;
+        }
+        .right-section {
+            flex: 1;
+            padding: 40px;
+        }
+        .btn-google {
+            background-color: #4285f4;
+            color: white;
+            border: none;
+        }
+        .btn-google:hover {
+            background-color: #357ae8;
+        }
+        .remember-me {
+            display: flex;
+            align-items: center;
+        }
+        .remember-me input {
+            margin-right: 5px;
+        }
+        @media (max-width: 768px) {
+            .login-card {
+                flex-direction: column;
+            }
+            .left-section, .right-section {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="login-container">
+    <div class="login-card">
+        <!-- Left Section -->
+        <div class="left-section">
+            <h1>Thredex</h1>
+            <p>100K+ People got hired</p>
+            <img src="https://via.placeholder.com/200" alt="Illustration">
+            <p class="mt-3">"Connecting talent with opportunity. Whether you're here to hire or get hired, your journey to success begins with us."</p>
+        </div>
+
+        <!-- Right Section -->
+        <div class="right-section">
+            <h2 class="mb-4 text-center">Welcome Back</h2>
+
+            <!-- Tabs Navigation -->
+            <ul class="nav nav-tabs" id="loginTabs" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link active" id="user-tab" data-bs-toggle="tab" data-bs-target="#user" type="button" role="tab" aria-controls="user" aria-selected="true">User</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="freelancer-tab" data-bs-toggle="tab" data-bs-target="#freelancer" type="button" role="tab" aria-controls="freelancer" aria-selected="false">Freelancer</button>
+                </li>
+            </ul>
+
+            <!-- Tabs Content -->
+            <div class="tab-content mt-4" id="loginTabsContent">
+                <!-- User Login Form -->
+                <div class="tab-pane fade show active" id="user" role="tabpanel" aria-labelledby="user-tab">
+                    <button class="btn btn-google w-100 mb-3">Login with Google</button>
+                    <p class="text-center text-muted">Or login with email</p>
+                    <form>
+                        <div class="mb-3">
+                            <label for="userEmail" class="form-label">Email Address</label>
+                            <input type="email" class="form-control" id="userEmail" placeholder="Enter email address">
+                        </div>
+                        <div class="mb-3">
+                            <label for="userPassword" class="form-label">Password</label>
+                            <input type="password" class="form-control" id="userPassword" placeholder="Enter password">
+                        </div>
+                        <div class="mb-3 remember-me">
+                            <input type="checkbox" id="userRememberMe">
+                            <label for="userRememberMe">Remember me</label>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100">Login</button>
+                    </form>
+                    <p class="text-center mt-3">Don't have an account? <a href="#">Sign Up</a></p>
+                </div>
+
+                <!-- Freelancer Login Form -->
+                <div class="tab-pane fade" id="freelancer" role="tabpanel" aria-labelledby="freelancer-tab">
+                    <button class="btn btn-google w-100 mb-3">Login with Google</button>
+                    <p class="text-center text-muted">Or login with email</p>
+                    <form>
+                        <div class="mb-3">
+                            <label for="freelancerEmail" class="form-label">Email Address</label>
+                            <input type="email" class="form-control" id="freelancerEmail" placeholder="Enter email address">
+                        </div>
+                        <div class="mb-3">
+                            <label for="freelancerPassword" class="form-label">Password</label>
+                            <input type="password" class="form-control" id="freelancerPassword" placeholder="Enter password">
+                        </div>
+                        <div class="mb-3 remember-me">
+                            <input type="checkbox" id="freelancerRememberMe">
+                            <label for="freelancerRememberMe">Remember me</label>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100">Login</button>
+                    </form>
+                    <p class="text-center mt-3">Don't have an account? <a href="#">Sign Up</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
