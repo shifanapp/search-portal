@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Freelancer Profile</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: Arial, sans-serif;
+        }
+        .profile-container {
+            max-width: 1200px;
+            margin: 20px auto;
+            background-color: #ffffff;
+            padding: 20px;
+            box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+        .profile-photo {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+        .profile-rating {
+            color: #f39c12;
+            font-size: 1.2rem;
+        }
+        .nav-tabs .nav-link.active {
+            border-bottom: 2px solid #007bff;
+            font-weight: bold;
+        }
+        .contact-info, .professional-info, .resume-info {
+            font-size: 0.9rem;
+            color: #333;
+        }
+        .skills-badge {
+            display: inline-block;
+            background-color: #e0e0e0;
+            padding: 5px 10px;
+            border-radius: 5px;
+            margin-right: 5px;
+            font-size: 13px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container profile-container">
+    <div class="row">
+        <!-- Left Section: Profile Photo and Contact Information -->
+        <div class="col-md-4">
+            <div class="text-center">
+                <img src="https://via.placeholder.com/100" alt="Profile Picture" class="profile-photo mb-3">
+                <h4>Jerome Bell</h4>
+                <p>Social Media Assistant</p>
+                <p class="profile-rating">⭐ 4.0</p>
+            </div>
+            <div class="mt-3">
+                <h6>Product Development</h6>
+                <p>Marketing • Full-Time</p>
+                <button class="btn btn-primary btn-block mb-3">Schedule Interview</button>
+            </div>
+            <div class="contact-info mt-4">
+                <h6>Contact Information</h6>
+                <p><strong>Email:</strong> <a href="mailto:jeromeBell45@email.com">jeromeBell45@email.com</a></p>
+                <p><strong>Phone:</strong> +44 1245 572 135</p>
+                <p><strong>Instagram:</strong> <a href="#">instagram.com/jeromebell</a></p>
+                <p><strong>WhatsApp:</strong> +44 1245 572 135</p>
+                <p><strong>Website:</strong> <a href="#">www.jeromebell.com</a></p>
+            </div>
+        </div>
+
+        <!-- Right Section: Tabs with Profile Details -->
+        <div class="col-md-8">
+            <ul class="nav nav-tabs" id="profileTabs" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active" id="profile-tab" data-toggle="tab" href="#profile" role="tab">Applicant Profile</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="resume-tab" data-toggle="tab" href="#resume" role="tab">Resume</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="progress-tab" data-toggle="tab" href="#hiring-progress" role="tab">Hiring Progress</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="schedule-tab" data-toggle="tab" href="#schedule" role="tab">Interview Schedule</a>
+                </li>
+            </ul>
+
+            <div class="tab-content mt-3">
+                <!-- Applicant Profile Tab -->
+                <div class="tab-pane fade show active" id="profile" role="tabpanel">
+                    <h5>Professional Info</h5>
+                    <div class="professional-info">
+                        <p><strong>About Me:</strong></p>
+                        <p>I’m a Social media assistant + filmmaker currently working remotely at Twitter from Manchester, UK. I’m passionate about designing digital products that have a positive impact on the world.</p>
+                        <p>For 10 years, I’ve specialized in interface, experience & interaction design and product strategy for agencies, big tech companies, and start-ups.</p>
+                        <p><strong>Current Job:</strong> Product Designer</p>
+                        <p><strong>Experience:</strong> 4 Years</p>
+                        <p><strong>Highest Qualification Held:</strong> Bachelors in Engineering</p>
+                        <p><strong>Skill Set:</strong> <span class="skills-badge">Project Management</span> <span class="skills-badge">Copywriting</span> <span class="skills-badge">English</span></p>
+                    </div>
+                </div>
+
+                <!-- Resume Tab -->
+                <div class="tab-pane fade" id="resume" role="tabpanel">
+                    <h5>Resume</h5>
+                    <div class="resume-info">
+                        <p><strong>Senior UI/UX Product Designer</strong></p>
+                        <p>Enterprise name</p>
+                        <p>Aug 2018 - Present - 1 year, Paris</p>
+                        <p>Directly collaborated with CEO and Product team to prototype, design, and deliver the UI and UX experience with a lean design process: research, design, test, and iterate.</p>
+                        <hr>
+                        <p><strong>UI/UX Product Designer</strong></p>
+                        <p>Enterprise name</p>
+                        <p>Aug 2013 - Aug 2018 - 5 years, Paris</p>
+                        <p>Lead the UI design with the accountability of the design system, collaborated with product and development teams on core projects to improve product interfaces and experiences.</p>
+                        <hr>
+                        <p><strong>Education</strong></p>
+                        <p>Bachelor European in Graphic Design</p>
+                        <p>School name</p>
+                        <p>2009 - 2010, Bagnolet</p>
+                    </div>
+                </div>
+
+                <!-- Hiring Progress Tab -->
+                <div class="tab-pane fade" id="hiring-progress" role="tabpanel">
+                    <h5>Hiring Progress</h5>
+                    <p>Content for hiring progress goes here...</p>
+                </div>
+
+                <!-- Interview Schedule Tab -->
+                <div class="tab-pane fade" id="schedule" role="tabpanel">
+                    <h5>Interview Schedule</h5>
+                    <p>Content for interview schedule goes here...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

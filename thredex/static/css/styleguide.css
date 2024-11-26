@@ -1,0 +1,155 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f9f9f9;
+}
+.header {
+  text-align: center;
+  margin-top: 50px;
+}
+.header h1 {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #333;
+}
+.header h1 span {
+  font-weight: normal;
+  text-decoration: underline;
+}
+.search-form {
+  max-width: 800px;
+  margin: 30px auto;
+  padding: 30px;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+.search-form .btn-search {
+  background-color: #28a745;
+  color: #ffffff;
+  font-weight: bold;
+  border: none;
+  padding: 10px 20px;
+}
+.search-form .btn-search:hover {
+  background-color: #218838;
+}
+.search-form .form-control, .dropdown {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 16px;
+  box-sizing: border-box;
+}
+.footer {
+  background-color: #333333;
+  color: #ffffff;
+  padding: 20px 0;
+  margin-top: 40px;
+}
+.footer .footer-link {
+  color: #bbbbbb;
+  font-size: 0.9rem;
+}
+.footer .footer-link:hover {
+  color: #ffffff;
+  text-decoration: none;
+}
+/* Dropdown style */
+.dropdown {
+width: 100%;
+padding: 10px;
+margin: 10px 0;
+border: 1px solid #ddd;
+border-radius: 4px;
+font-size: 16px;
+box-sizing: border-box;
+}
+/* Suggestions box style */
+
+/* Adjust suggestions box style for consistency */
+.suggestions-box {
+  width: 93%;
+  /* padding: 10px; */
+  max-height: 150px;
+  border: 1px solid #ddd;
+  background: #fff;
+  position: absolute;
+  z-index: 10;
+  overflow-y: auto;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin-top: -10px;
+  border-radius: 4px;
+}
+
+/* Individual suggestion item */
+.suggestions-box div {
+padding: 10px;
+cursor: pointer;
+}
+
+.suggestions-box div:hover {
+background-color: #f0f0f0;
+}
+/* CSS for basic_info html starts here */
+  /* Center the form and add some styling */
+        .basic_container {
+            max-width: 500px;
+            margin: 50px auto;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            border-radius: 8px;
+            background-color: #f8f9fa;
+        }
+
+        /* Style for the section buttons */
+        .btn-section {
+            width: 100%;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+
+        /* Styling form fields */
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        /* Reduce input field width */
+        input, select {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+        }
+        .form-section {
+          display: none;
+          margin-top: 20px;
+      }
+      .form-section.active {
+          display: block;
+      }
+      .required::after {
+          content: " *";
+          color: red;
+      }
+      .btn-custom {
+        background-color: #28a745;
+        color: #fff;
+    }
+    .btn-custom:hover {
+        background-color: #218838;
+    }
+    .note {
+        color: red;
+        margin-top: 10px;
+    }
+
+    .location-input {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      font-size: 16px;
+      box-sizing: border-box;
+    }

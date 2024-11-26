@@ -1,0 +1,88 @@
+/* css for dashboard */
+body {
+  background-color: #f8f9fa;
+}
+.sidebar {
+  background-color: #e9ecef;
+  min-height: 100vh;
+  padding: 20px;
+}
+.sidebar a {
+  color: #333;
+  text-decoration: none;
+  display: block;
+  padding: 10px;
+  font-weight: 500;
+  margin-bottom: 10px;
+}
+.sidebar a:hover, .sidebar a.active {
+  background-color: #d3d3d3;
+  border-radius: 5px;
+}
+.sidebar a.active, .sidebar a:hover {
+  background-color: #e0e5eb;
+  border-radius: 5px;
+  color: #555;
+}
+.settings-content {
+  padding: 20px;
+}
+.dashboard-content {
+  padding: 20px;
+}
+.profile-completion {
+  font-size: 0.9em;
+  color: #6c757d;
+}
+.stats-card, .profile-history-card, .interview-card {
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  margin-bottom: 20px;
+}
+.progress-ring {
+  position: relative;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: conic-gradient(#007bff 0% 60%, #6c757d 60% 100%);
+}
+.progress-ring-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 0.9em;
+  font-weight: bold;
+}
+.viewed-status {
+  color: #28a745;
+  font-weight: bold;
+}
+.status-badge {
+  font-size: 0.8em;
+  padding: 5px 10px;
+  border-radius: 15px;
+}
+.status-liked { background-color: #ffc107; color: #fff; }
+.status-shortlisted { background-color: #007bff; color: #fff; }
+.status-declined { background-color: #dc3545; color: #fff; }
+
+
+
+/* css for My public profile */
+ /* Profile Container Styling */
+ .profile-container {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 20px;
+}
+
+/* Main Content Styling */
+.main-content {
+  padding: 20px;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+}
+

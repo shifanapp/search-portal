@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Search Expert</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<body>
+    <h1>Find an Expert</h1>
+
+    <!-- Country dropdown -->
+    <label for="country-select">Select Country:</label>
+    <select id="country-select" name="country">
+        {% for code, name in countries %}
+            <option value="{{ code }}" {% if code == current_country %}selected{% endif %}>
+                {{ name }}
+            </option>
+        {% endfor %}
+    </select>
+
+    <!-- Location input -->
+    <label for="country-select">Select Country:</label>
+    <select id="country-select" name="country">
+        {% for code, name in countries %}
+            <option value="{{ code }}" {% if code == current_country %}selected{% endif %}>
+                {{ name }}
+            </option>
+        {% endfor %}
+    </select>
+    <ul id="city-suggestions" style="border: 1px solid #ddd; max-height: 150px; overflow-y: auto; display: none;"></ul>
+
+    <script>
+        $(document).ready(function () {
+            // Fetch cities dynamically as user types
+            $('#location-input').on('input', function () {
+                const query = $(this).val();
+                const country = $('#country-select').val();
+
+                if (query.length > 2) {
+                    $.ajax({
+                        url: "{% url 'get_cities' %}",
+                        data: { country_code: country, query: query },
+                        success: function (data) {
+                            const suggestions = $('#city-suggestions');
+                            suggestions.empty().show();
+
+                            data.cities.forEach(function (city) {
+                                suggestions.append(`<li style="cursor: pointer;">${city}</li>`);
+                            });
+
+                            // Click to select a city
+                            suggestions.find('li').on('click', function () {
+                                $('#location-input').val($(this).text());
+                                suggestions.hide();
+                            });
+                        },
+                        error: function () {
+                            console.error("Could not fetch cities");
+                        },
+                    });
+                } else {
+                    $('#city-suggestions').hide();
+                }
+            });
+        });
+    </script>
+</body>
+</html>
