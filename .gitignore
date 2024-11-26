@@ -31,3 +31,7 @@ migrations
 # Ignore logs
 *.log
 logs/
+
+/geoipfiles
+/geoip_cityfiles
+
