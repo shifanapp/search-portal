@@ -9,6 +9,9 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="{% static 'css/styles.css' %}" type="text/css">
     <link rel="stylesheet" href="{% static 'css/styleguide.css' %}" type="text/css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/choices.min.css" />
+    {% comment %} {% include "core/head_layout.html" %} {% endcomment %}
+
     <style>
         .btn-custom {
             background-color: #28a745;
@@ -21,332 +24,1129 @@
             color: red;
             margin-top: 10px;
         }
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+        }
+        .modal-content {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            width: 400px;
+            max-width: 90%;
+            margin: auto;
+        }
+        .close-btn {
+            cursor: pointer;
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 18px;
+            color: #333333;
+        }
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333333;
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+        input[type="radio"] {
+            margin-right: 5px;
+        }
+        h3 {
+            margin-top: 20px;
+            color: #333333;
+        }
+        p {
+            margin: 5px 0;
+            color: #666666;
+        }
+        .btn-primary {
+            display: block;
+            width: 100%;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #ffffff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            text-align: center;
+        }
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
     </style>
 </head>
-{% include "core/navbar_menu.html" %}
-
 <body>
+    {% comment %} {% include "core/navbar_menu.html" %} {% endcomment %}
 
-<div class="basic_container ">
-    <h2 class="text-center">Freelancer Registration</h2>
-    <p class="text-danger text-center">Fields marked with * are compulsory</p>
-    
-    <div class="d-flex flex-column align-items-center my-4">
-        <button id="btnBasicInfo" class="btn btn-primary w-100 mb-2" onclick="showSection('basicInfo')">Basic Information</button>
-        <button id="btnProfileInfo" class="btn btn-secondary w-100 mb-2" onclick="showSection('profileInfo')">Profile Information</button>
-        <button id="btnSkillsetInfo" class="btn btn-secondary w-100 mb-2 " onclick="showSection('skillsetInfo')">Skillset & Expertise</button>
-        <button id="btnWorkpreferenceInfo" class="btn btn-secondary w-100 mb-2 " onclick="showSection('workpreferenceInfo')">Work Preference</button>
-        <button id="btnWorkexperienceInfo" class="btn btn-secondary w-100 " onclick="showSection('workexperienceInfo')">Work Experience</button>
+    <div class="container">
+        <h2 class="text-center">Freelancer Registration</h2>
+        <p class="text-danger text-center">Fields marked with * are compulsory</p>
+        <div class="d-flex flex-column align-items-center my-4">
+            <div class="col-md-6 mb-2">
+                <button id="btnBasicInfo" class="btn btn-primary w-100" onclick="showSection('basicInfo')">Basic Information</button>
+            </div>
+            <div class="col-md-6 mb-2">
+                <button id="btnProfileInfo" class="btn btn-secondary w-100 mb-2" onclick="showSection('profileInfo')">Profile Information</button>
+            </div>
+            <div class="col-md-6 mb-2">
+                <button id="btnSkillsetInfo" class="btn btn-secondary w-100 mb-2" onclick="showSection('skillsetInfo')">Skillset & Expertise</button>
+            </div>
+            <div class="col-md-6 mb-2">
+                <button id="btnWorkpreferenceInfo" class="btn btn-secondary w-100 mb-2" onclick="showSection('workpreferenceInfo')">Work Preference</button>
+            </div>
+            <div class="col-md-6 mb-2">
+                <button id="btnWorkexperienceInfo" class="btn btn-secondary w-100" onclick="showSection('workexperienceInfo')">Work Experience</button>
+            </div>
+        </div>
 
-    </div>
-
-    <!-- Basic Information Section -->
-    <div id="basicInfo" class="form-section active">
-        <h4>Basic Information</h4>
-        <form id="basicInfoForm" novalidate>
-            <div class="mb-3">
-                <label for="fullName" class="form-label required">Full Name</label>
-                <input type="text" class="form-control" id="fullName" placeholder="Enter your full name"required>
-                <div class="invalid-feedback">Full Name is required.</div>
-            </div>
-            <div class="mb-3">
-                <label for="email" class="form-label required">Email</label>
-                <input type="email" class="form-control" id="email" placeholder="Enter your email" required>
-                <div class="invalid-feedback">Please enter a valid email address.</div>
-            </div>
-            <div class="mb-3">
-                <label for="phone" class="form-label required">Phone No</label>
-                <input type="text" id="phone" name="phone" class="form-control" placeholder="Enter your phone number"required>
-                <div class="invalid-feedback">Phone No is required.</div>
-            </div>
-            <div class="mb-3">
-                <label for="whatsapp"class="form-label required">WhatsApp No</label>
-                <input type="text" id="whatsapp" name="whatsapp" class="form-control" placeholder="Enter your WhatsApp number" required>
-                <div class="invalid-feedback">WhatsApp No is required.</div>
-            </div>
-            <div class="mb-3">
-                <label for="category"class="form-label required">Category:</label>
-                <select id="category" name="category" class="form-control"required>
-                    <option value="">Select category</option>
-                    <!-- Add other options here -->
+<div id="basicInfo" class="form-section active">
+    <h4>Basic Information</h4>
+    <form id="basicInfoForm" novalidate>
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="fullName" class="form-label required">Full Name</label>
+            <input type="text" class="form-control" id="fullName" name="full_name" placeholder="Enter your full name" required>
+            <div class="invalid-feedback">Full Name is required.</div>
+        </div>
+        <div class="mb-3">
+            <label for="email" class="form-label required">Email</label>
+            <input type="email" class="form-control" id="email" name="email" placeholder="Enter your email" required>
+            <div class="invalid-feedback">Please enter a valid email address.</div>
+        </div>
+        <div class="mb-3">
+            <label for="countryCode" class="form-label required">Phone No</label>
+            <div class="input-group phone-group">
+                <select id="countryCode" name="country_code" class="form-control" required>
+                    <option value="" disabled selected>Select Country Code or Name</option>
                 </select>
-                <div class="invalid-feedback">Category is required.</div>
+                <div class="invalid-feedback">Country code is required.</div>
+                <input type="text" id="mobileNumber" name="mobile_number" class="form-control" placeholder="Enter your phone number" required pattern="\d{10}">
+                <div class="invalid-feedback">Phone No must be 10 digits.</div>
             </div>
-            <div class="mb-3">
-                <label for="country"class="form-label required">Country:</label>
-                <select id="country" name="country" class="form-control" required>
-                    <option value="">Select  your Country</option>
-                    <!-- Add other options here -->
+        </div>
+        <div class="mb-3">
+            <label for="countryCodeWhatsapp" class="form-label required">WhatsApp No</label>
+            <div class="input-group phone-group">
+                <select id="countryCodeWhatsapp" name="country_code_whatsapp" class="form-control" required>
+                    <option value="" disabled selected>Select Country Code or Name</option>
                 </select>
-                <div class="invalid-feedback">Country is required.</div>
+                <div class="invalid-feedback">Country code is required.</div>
+                <input type="text" id="whatsappNumber" name="whatsapp_number" class="form-control" placeholder="Enter your WhatsApp number" required pattern="\d{10}">
+                <div class="invalid-feedback">WhatsApp No must be 10 digits.</div>
             </div>
-            <div class="mb-3">
-                <label for="city"class="form-label required">City:</label>
-                <select id="city" name="city" class="form-control" required>
-                    <option value="">Select your City</option>
-                    <!-- Add other options here -->
-                </select>
-                <div class="invalid-feedback">City is required.</div>
-            </div>
-            <div class="mb-3">
-                <label for="area"class="form-label required">Area Dispaly:</label>
-                <select id="area" name="area" class="form-control" required>
-                    <option value="">Enter in which areas your profile is dispaly</option>
-                    <!-- Add other options here -->
-                </select>
-                <div class="invalid-feedback">Area is required.</div>
-            </div>
-            <div class="mb-3">
-                <label for="username" class="form-label required">Username</label>
-                <input type="text" class="form-control" id="username" placeholder="Enter your username" required>
-                <div class="invalid-feedback">Username is required.</div>
-            </div>
-            <div class="mb-3">
-                <label for="password" class="form-label required">Password</label>
-                <input type="password" class="form-control" id="password" placeholder="Enter your password" required>
-                <div class="invalid-feedback">Password is required.</div>
-            </div>
-            <div class="mb-3">
-                <label for="confirmPassword" class="form-label required">Confirm Password</label>
-                <input type="password" class="form-control" id="confirmPassword" placeholder="Enter your confirm password" required>
-                <div class="invalid-feedback">Please confirm your password.</div>
-            </div>
-            <button type="button" class="btn btn-success" onclick="validateBasicInfo()">Next</button>
-        </form>
-    </div>
-
-    <!-- Profile Information Section -->
-    <div id="profileInfo" class="form-section">
-        <h4>Profile Information</h4>
-        <form id="profileInfoForm" novalidate>
-            <div class="mb-3">
-                <label for="profilePhoto" class="form-label required">Profile Photo</label>
-                <input type="file" class="form-control" id="profilePhoto" accept="image/*" required>
-                <div class="invalid-feedback">Profile photo is required.</div>
-            </div>
-            <div class="mb-3">
-                <label for="bio" class="form-label required">Bio</label>
-                <textarea class="form-control" id="bio" rows="3" required></textarea>
-                <div class="invalid-feedback">Please enter a brief bio.</div>
-            </div>
-            <div class="mb-3">
-                <label for="skills" class="form-label required">Skills</label>
-                <input type="text" class="form-control" id="skills" required>
-                <div class="invalid-feedback">Skills are required.</div>
-            </div>
-            <button type="submit" class="btn btn-primary">Register</button>
-        </form>
-    </div>
-
-      <!-- Skillset and Expertise Section-->
-    <div id="skillsetInfo" class="form-section">
-        <h4>Skillset and Expertise</h1>
-        <form>
-            <!-- Primary Skill Dropdown with Add Skill Button -->
-            <div class="mb-3">
-                <label for="primary-skill" class="form-label">Primary Skill</label>
-                <div class="input-group">
-                    <select id="primary-skill" class="form-select">
-                        <option selected>Select category</option>
-                        <option value="Web Development">Web Development</option>
-                        <option value="Graphic Design">Graphic Design</option>
-                        <option value="Data Analysis">Data Analysis</option>
-                        <!-- Add more options as needed -->
-                    </select>
-                    <button type="button" class="btn btn-custom" onclick="showAddSkillInput()">Add Skill</button>
-                </div>
-            </div>
-                    <!-- Add Skill Input (hidden initially) -->
-            <div id="add-skill-container" class="mt-4" style="display: none;">
-                <input type="text" id="new-skill" class="form-control mb-2" placeholder="Enter new skill">
-                <button type="button" class="btn btn-custom" onclick="addNewSkill()">Save Skill</button>
-            </div>
-            <!-- Additional Skills Input -->
-            <div class="mb-3">
-                <label for="additional-skills" class="form-label">Additional Skills</label>
-                <input type="text" id="additional-skills" class="form-control" placeholder="Enter your additional skills">
-            </div>
-            
-            <!-- Skill Level Dropdown -->
-            <div class="mb-3">
-                <label for="skill-level" class="form-label">Skill Level</label>
-                <select id="skill-level" class="form-select">
-                    <option selected>Select skill level</option>
-                    <option value="Beginner">Beginner</option>
-                    <option value="Intermediate">Intermediate</option>
-                    <option value="Advanced">Advanced</option>
-                </select>
-            </div>
-            
-            <!-- Note -->
-            <p class="note">*If your category is not in the list please add your category</p>
-            
-            <!-- Back and Next Buttons -->
-            <div class="d-flex justify-content-between">
-                <button type="button" class="btn btn-custom">Back</button>
-                <button type="button" class="btn btn-custom">Next</button>
-            </div>
-        </form>        
-    </div>
-
-    <!--Work preferences section-->
-    <div id="workpreferenceInfo" class="form-section">
-        <h4>Work Preferences</h4>    
-        <form>
-            <div class="form-group">
-                <label for="workType">Preferred Work Type</label>
-                <select class="form-control" id="workType">
-                    <option>Select your work type</option>
-                    <option>Full-time</option>
-                    <option>Part-time</option>
-                    <option>Freelance</option>
-                </select>
-            </div>
-            
-            <!-- Availability -->
-            <div class="form-group">
-                <label for="availability">Availability</label>
-                <input type="text" class="form-control" id="availability" placeholder="Enter your availability">
-            </div>
-
-            <!-- Hourly Rate/Project Rate -->
-            <div class="form-group">
-                <label for="rate">Hourly Rate/Project Rate</label>
-                <input type="text" class="form-control" id="rate" placeholder="Enter your rate">
-            </div>
-
-            <!-- Preferred Project Types -->
-            <div class="form-group">
-                <label for="projectType">Preferred Project Types</label>
-                <input type="text" class="form-control" id="projectType" placeholder="Enter project types (eg:Small tasks, Large projects, Ongoing work)">
-            </div>
-
-            <!-- Navigation Buttons -->
-            <div class="d-flex justify-content-between">
-                <button type="button" class="btn btn-success btn-custom">Back</button>
-                <button type="button" class="btn btn-success btn-custom">Next</button>
-            </div>
-        </form>
-    </div>
-
-    <!--Work preferences section-->
-    <div id="workexperienceInfo" class="form-section">
-        <h4>Work Experience</h4>    
-        <form>
-            <div class="form-group">
-                <label for="job_title">Job Tiltle</label>
-                <input type="text" class="form-control" id="job_title" placeholder="Enter your job title">
-            </div>
-            
-            <!-- Company/client name -->
-            <div class="form-group">
-                <label for="company_name">Company/Client Names</label>
-                <input type="text" class="form-control" id="company_name" placeholder="Enter your  past employment or freelance clients">
-            </div>
-
-            <!-- Duration of work -->
-            <div class="form-group">
-                <label for="duration_of_work">Duration of Work</label>
-                <input type="text" class="form-control" id="duration_of_work" placeholder="Enter the start date to end date">
-            </div>
-
-            <!--Description of Responsibilities -->
-            <div class="form-group">
-                <label for="responsibility">Description of Responsibilities</label>
-                <input type="text" class="form-control" id="responsibility" placeholder="Describe your responsibilities">
-            </div>
-
-             <!-- Work Samples -->
-             <div class="form-group">
-                <label for="work_samples">Work Samples</label>
-                <input type="text" class="form-control" id="work_samples" placeholder="Link to previous projects or upload files">
-            </div>
-
-            <!-- Navigation Buttons -->
-            <div class="d-flex justify-content-between">
-                <button type="button" class="btn btn-success btn-custom">Back</button>
-                <button type="button" class="btn btn-success btn-custom">Next</button>
-            </div>
-        </form>
-    </div>
+        </div>
+        <div class="mb-3">
+            <label for="category" class="form-label required">Category:</label>
+            <select id="category" name="category" class="form-control" required onchange="fetchServices()">
+                <option value="">Select category</option>
+                {% for category in categories %}
+                    <option value="{{ category.id }}">{{ category.name }}</option>
+                {% endfor %}
+            </select>
+            <div class="invalid-feedback">Category is required.</div>
+        </div>
+        <div class="mb-3">
+            <label for="service" class="form-label required">Service:</label>
+            <select id="service" name="service" class="form-control" required onchange="toggleServiceInput()">
+                <option value="">Select service</option>
+                <option value="other">Other</option>
+            </select>
+            <small class="form-text text-muted">Select "Other" if your service is not listed and type it here.</small>
+            <div class="invalid-feedback">Service is required.</div>
+        </div>
+        <div class="mb-3" id="new-service-container" style="display: none;">
+            <label for="new-service" class="form-label">Add New Service:</label>
+            <input type="text" id="new-service" name="new_service" class="form-control" placeholder="Type your service here">
+        </div>
+        <div class="mb-3">
+            <label for="country" class="form-label required">Country:</label>
+            <select id="id_country" name="country" class="form-control" required>
+                <option value="">Select a country</option>
+                {% for code, name in form.fields.country.choices %}
+                    <option value="{{ code }}" {% if form.country.value == code %}selected{% endif %}>
+                        {{ name }}
+                    </option>
+                {% endfor %}
+            </select>
+            <div class="invalid-feedback">Country is required.</div>
+        </div>
+        <div class="mb-3">
+            <label for="city" class="form-label required">City:</label>
+            <select id="id_city" name="city" class="form-control" required>
+                <option value="">Select a city</option>
+                {% for city in form.fields.city.queryset %}
+                    <option value="{{ city.id }}" {% if form.city.value == city.id %}selected{% endif %}>
+                        {{ city.name }}
+                    </option>
+                {% endfor %}
+            </select>
+            <div class="invalid-feedback">City is required.</div>
+        </div>
+        <div class="mb-3">
+            <label for="area" class="form-label required">Area Display:</label>
+            <input type="text" class="form-control" id="area" name="area" placeholder="Enter in which areas your profile is displayed" required>
+            <div class="invalid-feedback">Area is required.</div>
+        </div>
+        <div class="mb-3">
+            <label for="username" class="form-label required">Username</label>
+            <input type="text" class="form-control" id="username" name="username" placeholder="Enter your username" required onblur="checkUsernameAvailability()">
+            <div class="invalid-feedback" id="usernameFeedback">Username is already taken.</div>
+        </div>
+        <div class="mb-3">
+            <label for="password" class="form-label required">Password</label>
+            <input type="password" class="form-control" id="password" name="password" placeholder="Enter your password" required>
+            <div class="invalid-feedback">Password is required.</div>
+        </div>
+        <div class="mb-3">
+            <label for="confirmPassword" class="form-label required">Confirm Password</label>
+            <input type="password" class="form-control" id="confirmPassword" name="confirm_password" placeholder="Enter your confirm password" required>
+            <div class="invalid-feedback" id="passwordMismatchFeedback">Passwords do not match.</div>
+        </div>
+        <div class="d-flex justify-content-between mt-3">
+            <button type="button" class="btn btn-success" onclick="validateBasicInfo()">Skip & Register</button>
+            {% comment %} <button type="button" class="btn btn-custom" onclick="openModal()">Next</button> {% endcomment %}
+        </div>
+    </form>
 </div>
+<style>
+.phone-group {
+    display: flex;
+    flex-direction: column; /* Stack elements vertically */
+    gap: 8px; /* Adjust spacing between elements */
+}
 
+.phone-group .form-control {
+    width: 100%; /* Ensure full width */
+    height: calc(2.25rem + 2px); /* Match input height */
+    font-size: 1rem; /* Match font size with input */
+    border: 1px solid #ced4da; /* Light border */
+    border-radius: 0.25rem; /* Rounded corners */
+    padding: 0.375rem 0.75rem; /* Adjust padding */
+}
+/* Dropdown (Choices.js) Styling */
+.choices__inner {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 5px;
+    box-shadow: none;
+    background: #fff;
+}
+
+.choices__list--dropdown {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    background: #fff;
+    z-index: 1000; /* Ensure it appears on top */
+}
+
+.choices__list--dropdown .choices__item {
+    padding: 10px;
+    font-size: 14px;
+    color: #333;
+    cursor: pointer;
+}
+
+.choices__list--dropdown .choices__item--selected {
+    background: #007bff;
+    color: #fff;
+}
+
+.choices__list--dropdown .choices__item--highlighted {
+    background: #f0f0f0;
+}
+
+.choices__list--dropdown .choices__no-results {
+    padding: 10px;
+    font-size: 14px;
+    color: #999;
+}
+
+/* Input Field Styling */
+input[type="text"],
+select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+
+
+/* Responsive Design */
+@media (max-width: 576px) {
+    .phone-group {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .phone-group .form-select,
+    .phone-group .form-control {
+        width: 100%;
+        max-width: none;
+    }
+}
+</style>
+        <div id="profileInfo" class="form-section">
+            <h4>Profile Information</h4>
+            <form id="profileInfoForm" novalidate>
+                <div class="mb-3">
+                    <label for="profilePhoto" class="form-label required">Profile Photo</label>
+                    <input type="file" class="form-control" id="profilePhoto" accept="image/*" required>
+                    <div class="invalid-feedback">Profile photo is required.</div>
+                </div>
+                <div class="mb-3">
+                    <label for="bio" class="form-label required">Bio</label>
+                    <textarea class="form-control" id="bio" rows="3" required></textarea>
+                    <div class="invalid-feedback">Please enter a brief bio.</div>
+                </div>
+                <div class="mb-3">
+                    <label for="skills" class="form-label required">Skills</label>
+                    <input type="text" class="form-control" id="skills" required>
+                    <div class="invalid-feedback">Skills are required.</div>
+                </div>
+                <button type="submit" class="btn btn-primary">Register</button>
+            </form>
+        </div>
+        <div id="skillsetInfo" class="form-section">
+            <h4>Skillset and Expertise</h4>
+            <form>
+                <div class="mb-3">
+                    <label for="primary-skill" class="form-label">Primary Skill</label>
+                    <div class="input-group">
+                        <select id="primary-skill" class="form-select">
+                            <option selected>Select category</option>
+                            <option value="Web Development">Web Development</option>
+                            <option value="Graphic Design">Graphic Design</option>
+                            <option value="Data Analysis">Data Analysis</option>
+                        </select>
+                        <button type="button" class="btn btn-custom" onclick="showAddSkillInput()">Add Skill</button>
+                    </div>
+                </div>
+                <div id="add-skill-container" class="mt-4" style="display: none;">
+                    <input type="text" id="new-skill" class="form-control mb-2" placeholder="Enter new skill">
+                    <button type="button" class="btn btn-custom" onclick="addNewSkill()">Save Skill</button>
+                </div>
+                <div class="mb-3">
+                    <label for="additional-skills" class="form-label">Additional Skills</label>
+                    <input type="text" id="additional-skills" class="form-control" placeholder="Enter your additional skills">
+                </div>
+                <div class="mb-3">
+                    <label for="skill-level" class="form-label">Skill Level</label>
+                    <select id="skill-level" class="form-select">
+                        <option selected>Select skill level</option>
+                        <option value="Beginner">Beginner</option>
+                        <option value="Intermediate">Intermediate</option>
+                        <option value="Advanced">Advanced</option>
+                    </select>
+                </div>
+                <p class="note">*If your category is not in the list please add your category</p>
+                <div class="d-flex justify-content-between">
+                    <button type="button" class="btn btn-custom">Back</button>
+                    <button type="button" class="btn btn-custom">Next</button>
+                </div>
+            </form>
+        </div>
+        <div id="workpreferenceInfo" class="form-section">
+            <h4>Work Preferences</h4>
+            <form>
+                <div class="form-group">
+                    <label for="workType">Preferred Work Type</label>
+                    <select class="form-control" id="workType">
+                        <option>Select your work type</option>
+                        <option>Full-time</option>
+                        <option>Part-time</option>
+                        <option>Freelance</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="availability">Availability</label>
+                    <input type="text" class="form-control" id="availability" placeholder="Enter your availability">
+                </div>
+                <div class="form-group">
+                    <label for="rate">Hourly Rate/Project Rate</label>
+                    <input type="text" class="form-control" id="rate" placeholder="Enter your rate">
+                </div>
+                <div class="form-group">
+                    <label for="projectType">Preferred Project Types</label>
+                    <input type="text" class="form-control" id="projectType" placeholder="Enter project types (eg:Small tasks, Large projects, Ongoing work)">
+                </div>
+                <div class="d-flex justify-content-between">
+                    <button type="button" class="btn btn-success btn-custom">Back</button>
+                    <button type="button" class="btn btn-success btn-custom">Next</button>
+                </div>
+            </form>
+        </div>
+        <div id="workexperienceInfo" class="form-section">
+            <h4>Work Experience</h4>
+            <form>
+                <div class="form-group">
+                    <label for="job_title">Job Title</label>
+                    <input type="text" class="form-control" id="job_title" placeholder="Enter your job title">
+                </div>
+                <div class="form-group">
+                    <label for="company_name">Company/Client Names</label>
+                    <input type="text" class="form-control" id="company_name" placeholder="Enter your past employment or freelance clients">
+                </div>
+                <div class="form-group">
+                    <label for="duration_of_work">Duration of Work</label>
+                    <input type="text" class="form-control" id="duration_of_work" placeholder="Enter the start date to end date">
+                </div>
+                <div class="form-group">
+                    <label for="responsibility">Description of Responsibilities</label>
+                    <input type="text" class="form-control" id="responsibility" placeholder="Describe your responsibilities">
+                </div>
+                <div class="form-group">
+                    <label for="work_samples">Work Samples</label>
+                    <input type="text" class="form-control" id="work_samples" placeholder="Link to previous projects or upload files">
+                </div>
+                <div class="d-flex justify-content-between">
+                    <button type="button" class="btn btn-success btn-custom">Back</button>
+                    <button type="button" class="btn btn-success btn-custom">Next</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div id="paymentModal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal()" style="cursor: pointer; position: absolute; top: 10px; right: 10px;">&times;</span>
+            <h2>Checkout</h2>
+            <form id="paymentForm">
+                {% csrf_token %}
+                <div>
+                    <label>
+                        <input type="radio" name="paymentMethod" value="cash" onclick="togglePaymentMethod()"> Cash
+                    </label>
+                    <label>
+                      <input type="radio" name="paymentMethod" value="stripe" onclick="togglePaymentMethod()"> Stripe
+                    </label>
+                </div>
+    
+                <!-- Stripe Message (Initially hidden) -->
+                <div id="stripeMessage" style="display: none;">
+                    <p>Stripe payment selected. Please enter your card details.</p>
+                </div>
+    
+                <!-- Card Details (Initially hidden) -->
+                <div id="stripeDetails" style="display: none;">
+                    <div>
+                        <label>Name on Card</label>
+                        <input type="text" id="cardName" required>
+                    </div>
+                    <div id="card-element">
+                        <!-- A Stripe Element will be inserted here. -->
+                      </div>
+                      <div id="card-errors" role="alert"></div>
+                  </div>
+      
+                  <div id="cashDetails" style="display: none;">
+                      <p>Cash payment selected. No further details required.</p>
+                  </div>
+                  {% comment %} <div>
+                      <h3>Summary</h3>
+                      <p id="pricing">Pricing: $50.00</p>
+                    <p id="total">Total: $50.00 USD</p>
+                  </div> {% endcomment %}
+                  {% comment %} <div id="price-summary">
+                    <p><strong>Pricing:</strong> $50.00 USD</p>
+                    <p><strong>Converted Price:</strong> Loading...</p>
+                </div> {% endcomment %}
+                <div id="price-summary">
+                    <p><strong>Pricing:</strong> Loading...</p>
+                    <p><strong>Converted Price:</strong> Loading...</p>
+                </div>
+                
+                
+                  <button type="button" class="btn btn-primary" onclick="handlePayment()">Pay Now</button>
+              </form>
+          </div>
+      </div>
+    </div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/choices.js/public/assets/scripts/choices.min.js"></script>
 <script>
-    function showSection(sectionId) {
-        document.querySelectorAll('.form-section').forEach(section => section.classList.remove('active'));
-        document.getElementById(sectionId).classList.add('active');
-
-        document.getElementById('btnBasicInfo').classList.toggle('btn-primary', sectionId === 'basicInfo');
-        document.getElementById('btnBasicInfo').classList.toggle('btn-secondary', sectionId !== 'basicInfo');
-        document.getElementById('btnProfileInfo').classList.toggle('btn-primary', sectionId === 'profileInfo');
-        document.getElementById('btnProfileInfo').classList.toggle('btn-secondary', sectionId !== 'profileInfo');
-        document.getElementById('btnSkillsetInfo').classList.toggle('btn-primary', sectionId === 'skillsetInfo');
-        document.getElementById('btnSkillsetInfo').classList.toggle('btn-secondary', sectionId !== 'skillsetInfo');
-        document.getElementById('btnWorkpreferenceInfo').classList.toggle('btn-primary', sectionId === 'workpreferenceInfo');
-        document.getElementById('btnWorkpreferenceInfo').classList.toggle('btn-secondary', sectionId !== 'workpreferenceInfo');
-        document.getElementById('btnWorkexperienceInfo').classList.toggle('btn-primary', sectionId === 'workexperienceInfo');
-        document.getElementById('btnWorkexperienceInfo').classList.toggle('btn-secondary', sectionId !== 'workexperienceInfo');
- 
- 
-    }
-
-    function validateBasicInfo() {
-        const form = document.getElementById('basicInfoForm');
-        if (form.checkValidity()) {
-            showSection('profileInfo');
-        } else {
-            form.classList.add('was-validated');
+        function showSection(sectionId) {
+            document.querySelectorAll('.form-section').forEach(section => section.classList.remove('active'));
+            document.getElementById(sectionId).classList.add('active');      
+            document.getElementById('btnBasicInfo').classList.toggle('btn-primary', sectionId === 'basicInfo');
+            document.getElementById('btnBasicInfo').classList.toggle('btn-secondary', sectionId !== 'basicInfo');
+            document.getElementById('btnProfileInfo').classList.toggle('btn-primary', sectionId === 'profileInfo');
+            document.getElementById('btnProfileInfo').classList.toggle('btn-secondary', sectionId !== 'profileInfo');
+            document.getElementById('btnSkillsetInfo').classList.toggle('btn-primary', sectionId === 'skillsetInfo');
+            document.getElementById('btnSkillsetInfo').classList.toggle('btn-secondary', sectionId !== 'skillsetInfo');
+            document.getElementById('btnWorkpreferenceInfo').classList.toggle('btn-primary', sectionId === 'workpreferenceInfo');
+            document.getElementById('btnWorkpreferenceInfo').classList.toggle('btn-secondary', sectionId !== 'workpreferenceInfo');
+            document.getElementById('btnWorkexperienceInfo').classList.toggle('btn-primary', sectionId === 'workexperienceInfo');
+            document.getElementById('btnWorkexperienceInfo').classList.toggle('btn-secondary', sectionId !== 'workexperienceInfo');
         }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const countryCodeDropdown = document.getElementById('countryCode');
+            const countryCodeWhatsappDropdown = document.getElementById('countryCodeWhatsapp');    
+            const countryDropdown = document.getElementById('id_country');
+            
+            const choices = new Choices(countryCodeDropdown, {
+            searchEnabled: true, // Enable search functionality
+            removeItemButton: false,
+            itemSelectText: '',
+            placeholderValue: 'Type country code or name',
+            noResultsText: 'No matches found',
+        });
+
+            const whatsappChoices = new Choices(countryCodeWhatsappDropdown, {
+            searchEnabled: true, // Enable search functionality
+            removeItemButton: false,
+            itemSelectText: '',
+            placeholderValue: 'Type country code or name',
+            noResultsText: 'No matches found',
+        });
+
+        const countryChoices = new Choices(countryDropdown, {
+            searchEnabled: true, // Enable search functionality
+            removeItemButton: false,
+            itemSelectText: '',
+            placeholderValue: 'Type country name',
+            noResultsText: 'No matches found',
+        });
+        
+    // Fetch country codes
+    fetch('https://restcountries.com/v3.1/all')
+    .then(response => response.json())
+    .then(data => {
+        const countryOptions = data.map(country => {
+            if (country.idd && country.idd.root && country.idd.suffixes) {
+                const countryCode = `${country.idd.root}${country.idd.suffixes[0]}`;
+                return {
+                    value: countryCode,
+                    label: `${countryCode} - ${country.name.common}`,
+                };
+            }
+            return null;
+        }).filter(Boolean); // Filter out null values
+
+        // Add options to Choices.js dropdowns
+        choices.setChoices(countryOptions, 'value', 'label', true);
+        whatsappChoices.setChoices(countryOptions, 'value', 'label', true);
+
+        const countryNameOptions = data.map(country => ({
+            value: country.cca2,
+            label: country.name.common,
+        }));
+
+        countryChoices.setChoices(countryNameOptions, 'value', 'label', true);
+    })
+    .catch(error => console.error('Error fetching country codes:', error));
+});
+    
+function validateBasicInfo() {
+    const basicInfoForm = document.getElementById('basicInfoForm');
+    const countryCode = document.getElementById('countryCode');
+    const mobileNumber = document.getElementById('mobileNumber');
+    const countryCodeWhatsapp = document.getElementById('countryCodeWhatsapp');
+    const whatsappNumber = document.getElementById('whatsappNumber');
+    const country = document.getElementById('id_country');
+    const password = document.getElementById('password');
+    const confirmPassword = document.getElementById('confirmPassword');
+    const serviceSelect = document.getElementById('service');
+
+    const selectedCountry = country.value;
+    const selectedService = serviceSelect.value;
+    // Validate country code
+    if (countryCode.value === "") {
+        countryCode.setCustomValidity('Country code is required.');
+    } else {
+        countryCode.setCustomValidity('');
     }
 
-    document.getElementById('profileInfoForm').addEventListener('submit', function(event) {
-        if (!this.checkValidity()) {
-            event.preventDefault();
-            this.classList.add('was-validated');
+    // Validate mobile number
+    if (!/^\d{10}$/.test(mobileNumber.value)) {
+        mobileNumber.setCustomValidity('Phone No must be 10 digits.');
+    } else {
+        mobileNumber.setCustomValidity('');
+    }
+
+    // Validate WhatsApp country code
+    if (countryCodeWhatsapp.value === "") {
+        countryCodeWhatsapp.setCustomValidity('Country code is required.');
+    } else {
+        countryCodeWhatsapp.setCustomValidity('');
+    }
+
+    // Validate WhatsApp number
+    if (!/^\d{10}$/.test(whatsappNumber.value)) {
+        whatsappNumber.setCustomValidity('WhatsApp No must be 10 digits.');
+    } else {
+        whatsappNumber.setCustomValidity('');
+    }
+     // Validate country
+     if (country.value === "") {
+        country.setCustomValidity('Country is required.');
+    } else {
+        country.setCustomValidity('');
+    }
+    // Validate password and confirm password
+    if (password.value !== confirmPassword.value) {
+        confirmPassword.setCustomValidity('Passwords do not match.');
+        passwordMismatchFeedback.style.display = 'block';
+    } else {
+        confirmPassword.setCustomValidity('');
+        passwordMismatchFeedback.style.display = 'none';
+    }
+
+    if (basicInfoForm.checkValidity()) {
+       // alert("hi")
+        fetchConvertedPrice(selectedCountry, selectedService);
+    } else {
+        basicInfoForm.classList.add('was-validated');
+    }
+}
+{% comment %} function fetchConvertedPrice(country, serviceId) {
+   // alert("kooo")
+    const priceSummary = document.getElementById('price-summary');
+
+    // Step 1: Fetch service price from Django backend
+    fetch(`/get-service-price/?service_id=${serviceId}`)
+        .then(response => response.json())
+        .then(data => {
+            if (data.error) {
+                console.error("Service not found");
+                priceSummary.innerHTML = `<p><strong>Pricing:</strong> Service not found</p>`;
+                return;
+            }
+
+            const usdPrice = data.price; // Get actual price from database
+
+            // 🔹 Immediately show the service price in USD
+            priceSummary.innerHTML = `<p><strong>Pricing:</strong> $${usdPrice} USD</p>`;
+            
+            // Step 2: Get currency code dynamically from API
+            fetch(`https://restcountries.com/v3.1/name/${country}`)
+                .then(response => response.json())
+                .then(countryData => {
+                    const currencyCode = Object.keys(countryData[0].currencies)[0]; // Get first currency code
+                    alert(currencyCode)
+                    // Step 3: Fetch exchange rate for selected currency
+                    fetch(`https://api.exchangerate-api.com/v4/latest/USD`)
+                        .then(response => response.json())
+                        .then(exchangeData => {
+                            const exchangeRate = exchangeData.rates[currencyCode] || 1; // Default to 1 if not found
+                            const convertedPrice = (usdPrice * exchangeRate).toFixed(2);
+                           // alert(convertedPrice)
+                            // 🔹 Update the converted price after fetching exchange rate
+                            priceSummary.innerHTML += `<p><strong>Converted Price:</strong> ${convertedPrice} ${currencyCode}</p>`;
+                            //alert( priceSummary.innerHTML )
+                            openModal();
+                        })
+                        .catch(error => {
+                            console.error("Error fetching exchange rate:", error);
+                            priceSummary.innerHTML += `<p><strong>Converted Price:</strong> Not available</p>`;
+                            openModal();
+                        });
+                })
+                .catch(error => {
+                    console.error("Error fetching country data:", error);
+                    priceSummary.innerHTML += `<p><strong>Converted Price:</strong> Not available</p>`;
+                    openModal();
+                });
+        })
+        .catch(error => console.error("Error fetching service price:", error));
+} {% endcomment %}
+function fetchConvertedPrice(country, serviceId) {
+    const priceSummary = document.getElementById('price-summary');
+
+    // Step 1: Fetch service price from Django backend
+    fetch(`/get-service-price/?service_id=${serviceId}`)
+        .then(response => response.json())
+        .then(data => {
+            if (data.error) {
+                console.error("Service not found");
+                priceSummary.innerHTML = `<p><strong>Pricing:</strong> Service not found</p>`;
+                return;
+            }
+
+            const usdPrice = data.price; // Get actual price from database
+            priceSummary.innerHTML = `<p><strong>Pricing:</strong> $${usdPrice} USD</p>`;
+
+            // Step 2: Get the currency code for the selected country
+            fetch(`https://restcountries.com/v3.1/alpha/${country}`)
+            .then(response => response.json())
+                .then(countryData => {
+                    if (countryData.length === 0 || !countryData[0].currencies) {
+                        console.error("No currency data found");
+                        priceSummary.innerHTML += `<p><strong>Converted Price:</strong> Not available</p>`;
+                        openModal();
+                        return;
+                    }
+
+                    // Extract the correct currency code
+                    const currencies = countryData[0].currencies;
+                    const currencyCode = Object.keys(currencies)[0]; // Get the actual currency code
+                    const currencyName = currencies[currencyCode].name; // Get full currency name
+                    console.log(`Currency for ${country}: ${currencyCode} (${currencyName})`);
+
+                    // Step 3: Fetch exchange rate for the selected currency
+                    fetch(`https://api.exchangerate-api.com/v4/latest/USD`)
+                        .then(response => response.json())
+                        .then(exchangeData => {
+                            if (!exchangeData.rates[currencyCode]) {
+                                console.error("Exchange rate not found");
+                                priceSummary.innerHTML += `<p><strong>Converted Price:</strong> Not available</p>`;
+                                openModal();
+                                return;
+                            }
+
+                            const exchangeRate = exchangeData.rates[currencyCode]; // Get exchange rate
+                            const convertedPrice = (usdPrice * exchangeRate).toFixed(2); // Convert price
+
+                            // 🔹 Update the converted price with the correct currency code
+                            priceSummary.innerHTML += `<p><strong>Converted Price:</strong> ${convertedPrice} ${currencyCode} (${currencyName})</p>`;
+                            openModal();
+                        })
+                        .catch(error => {
+                            console.error("Error fetching exchange rate:", error);
+                            priceSummary.innerHTML += `<p><strong>Converted Price:</strong> Not available</p>`;
+                            openModal();
+                        });
+                })
+                .catch(error => {
+                    console.error("Error fetching country data:", error);
+                    priceSummary.innerHTML += `<p><strong>Converted Price:</strong> Not available</p>`;
+                    openModal();
+                });
+        })
+        .catch(error => console.error("Error fetching service price:", error));
+}
+
+function checkUsernameAvailability() {
+    const username = document.getElementById('username').value;
+    const usernameFeedback = document.getElementById('usernameFeedback');
+    const usernameInput = document.getElementById('username');
+
+    if (username.trim() === "") {
+        usernameInput.setCustomValidity('Username is required.');
+        usernameFeedback.style.display = 'block';
+        usernameFeedback.textContent = 'Username is required.';
+        return;
+    }
+
+    $.ajax({
+        url: "{% url 'ajax_check_username' %}",
+        data: {'username': username},
+        success: function (data) {
+            if (data.is_taken) {
+                usernameInput.setCustomValidity('Username is already taken.');
+                usernameFeedback.style.display = 'block';
+                usernameFeedback.textContent = 'Username is already taken.';
+            } else {
+                usernameInput.setCustomValidity('');
+                usernameFeedback.style.display = 'none';
+            }
+        },
+        error: function () {
+            alert("An error occurred while checking username availability. Please try again.");
         }
     });
+}
 
-    document.getElementById('confirmPassword').addEventListener('input', function() {
-        if (this.value !== document.getElementById('password').value) {
-            this.setCustomValidity("Passwords don't match");
-        } else {
-            this.setCustomValidity('');
-        }
+          function toggleServiceInput() {
+              const serviceSelect = document.getElementById('service');
+              const newServiceContainer = document.getElementById('new-service-container');
+              if (serviceSelect.value === 'other') {
+                  newServiceContainer.style.display = 'block';
+              } else {
+                  newServiceContainer.style.display = 'none';
+              }
+          }
+      
+          function closeModal() {
+              document.getElementById('paymentModal').style.display = 'none';
+          }
+      
+          function openModal() {
+              document.getElementById('paymentModal').style.display = 'block';
+          }
+      
+          document.getElementById('profileInfoForm').addEventListener('submit', function(event) {
+              if (!this.checkValidity()) {
+                  event.preventDefault();
+                  this.classList.add('was-validated');
+              }
+          });
+      
+          document.getElementById('confirmPassword').addEventListener('input', function() {
+              if (this.value !== document.getElementById('password').value) {
+                  this.setCustomValidity("Passwords don't match");
+              } else {
+                  this.setCustomValidity('');
+              }
+          });
+      </script>
+      <script>
+          function showAddSkillInput() {
+              document.getElementById('add-skill-container').style.display = 'block';
+          }
+      
+          function addNewSkill() {
+              const newSkill = document.getElementById('new-skill').value.trim();
+      
+              if (newSkill === '') {
+                  alert("Please enter a skill.");
+                  return;
+              }
+      
+              const primarySkillSelect = document.getElementById('primary-skill');
+              const newOption = document.createElement('option');
+              newOption.value = newSkill;
+              newOption.text = newSkill;
+              primarySkillSelect.add(newOption);
+      
+              document.getElementById('new-skill').value = '';
+              document.getElementById('add-skill-container').style.display = 'none';
+      
+              primarySkillSelect.value = newSkill;
+          }
+      
+          function handleCategoryChange() {
+              const categoryDropdown = document.getElementById("category");
+              const otherCategoryBox = document.getElementById("other-category-box");
+      
+              if (categoryDropdown.value === "other") {
+                  otherCategoryBox.style.display = "block";
+              } else {
+                  otherCategoryBox.style.display = "none";
+                  document.getElementById("other-category").value = "";
+              }
+          }
+      </script>
+      <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script>
+    $(document).ready(function () {
+        const cityDropdown = document.getElementById('id_city');
+        const cityChoices = new Choices(cityDropdown, {
+            searchEnabled: true, // Enable search functionality
+            removeItemButton: false,
+            itemSelectText: '',
+            placeholderValue: 'Type city name',
+            noResultsText: 'No matches found',
+        });
+
+        $('#id_country').change(function () {
+            var countryId = $(this).val();
+            console.log("Selected country: ", countryId);
+            $.ajax({
+                url: "{% url 'ajax_load_cities' %}",
+                data: {'country': countryId},
+                success: function (data) {
+                    cityChoices.clearStore();
+                    cityChoices.setChoices(data.cities.map(city => ({
+                        value: city.name,
+                        label: city.name,
+                    })), 'value', 'label', true);
+                },
+                error: function () {
+                    alert("An error occurred while loading cities. Please try again.");
+                }
+            });
+        });
     });
 </script>
-<script>
-    function showAddSkillInput() {
-        // Show the new skill input container
-        document.getElementById('add-skill-container').style.display = 'block';
-    }
-
-    function addNewSkill() {
-        // Get the value of the new skill
-        const newSkill = document.getElementById('new-skill').value.trim();
-
-        // Check if input is not empty
-        if (newSkill === '') {
-            alert("Please enter a skill.");
+      <script>
+          function fetchServices() {
+              const categoryId = document.getElementById('category').value;
+              const serviceDropdown = document.getElementById('service');
+              const newServiceContainer = document.getElementById('new-service-container');
+      
+              serviceDropdown.innerHTML = '<option value="">Select service</option>';
+              newServiceContainer.style.display = 'none';
+      
+              if (categoryId) {
+                  fetch(`/get-services/${categoryId}/`)
+                      .then(response => response.json())
+                      .then(data => {
+                          data.services.forEach(service => {
+                              const option = document.createElement('option');
+                              option.value = service.id;
+                              option.textContent = service.service_name;
+                              serviceDropdown.appendChild(option);
+                          });
+      
+                          const otherOption = document.createElement('option');
+                          otherOption.value = 'other';
+                          otherOption.textContent = 'Other';
+                          serviceDropdown.appendChild(otherOption);
+                      })
+                      .catch(error => console.error('Error fetching services:', error));
+              }
+          }
+      
+          function toggleServiceInput() {
+              const serviceDropdown = document.getElementById('service');
+              const newServiceContainer = document.getElementById('new-service-container');
+      
+              if (serviceDropdown.value === 'other') {
+                  newServiceContainer.style.display = 'block';
+              } else {
+                  newServiceContainer.style.display = 'none';
+              }
+          }
+      </script>
+      <script src="https://js.stripe.com/v3/"></script>
+      <script>
+        const stripe = Stripe('pk_test_51Pd6TmRpdtLBtGkSLpxfBNHRQSoDa7AViqgko0v76clZ3PWP1w6PoXCEJB9PQigQdb8jtvwlCs1M7zzlziiqQJBt00bwhVFPau');
+        const elements = stripe.elements();
+        const card = elements.create('card');
+        card.mount('#card-element');
+      
+        function getCookie(name) {
+          let cookieValue = null;
+          if (document.cookie && document.cookie !== '') {
+            const cookies = document.cookie.split(';');
+            for (let i = 0; i < cookies.length; i++) {
+              const cookie = cookies[i].trim();
+              if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+              }
+            }
+          }
+          return cookieValue;
+        }
+      
+        function handlePayment() {
+          const selectedPayment = document.querySelector('input[name="paymentMethod"]:checked').value;
+          const basicInfoForm = document.getElementById('basicInfoForm');
+          const paymentForm = document.getElementById('paymentForm');
+      
+          if (!basicInfoForm.checkValidity()) {
+            basicInfoForm.reportValidity();
             return;
+          }
+      
+          if (selectedPayment === 'stripe') {
+            const csrftoken = getCookie('csrftoken');
+            const formData = new FormData(basicInfoForm);
+            const jsonData = Object.fromEntries(formData.entries());
+            // Replace city ID with city name
+          //const cityId = jsonData.city;
+          // const citySelect = document.getElementById('city');
+          // const cityName = citySelect.options[citySelect.selectedIndex].text;
+         //jsonData.city = cityName;
+
+            fetch('/create-payment-intent/', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': csrftoken
+              },
+              body: JSON.stringify(jsonData)
+            })
+            .then((response) => response.json())
+            .then((data) => {
+              stripe.confirmCardPayment(data.client_secret, {
+                payment_method: {
+                  card: card,
+                  billing_details: {
+                    name: document.getElementById('cardName').value,
+                  },
+                },
+              }).then((result) => {
+                if (result.error) {
+                  document.getElementById('card-errors').textContent = result.error.message;
+                } else {
+                  if (result.paymentIntent.status === 'succeeded') {
+                    console.log('Payment succeeded!');
+                    fetch('/submit-user-details/', {
+                      method: 'POST',
+                      headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRFToken': csrftoken
+                      },
+                      body: JSON.stringify(jsonData)
+                    })
+                    .then((response) => response.json())
+                    .then((data) => {
+                      window.location.href = `/payment-success/?payment_intent=${result.paymentIntent.id}`;
+                    })
+                    .catch((error) => {
+                      console.error('Error:', error);
+                    });
+                  }
+                }
+              });
+            })
+            .catch((error) => {
+              console.error('Error:', error);
+            });
+          }
+        } 
+        {% comment %} <script> {% endcomment %}
+        {% comment %} function handlePayment() {
+            const selectedPayment = document.querySelector('input[name="paymentMethod"]:checked').value;
+            const basicInfoForm = document.getElementById('basicInfoForm');
+            const paymentForm = document.getElementById('paymentForm');
+        
+            if (!basicInfoForm.checkValidity()) {
+                basicInfoForm.reportValidity();
+                return;
+            }
+        
+            if (selectedPayment === 'stripe') {
+                const csrftoken = getCookie('csrftoken');
+                const formData = new FormData(basicInfoForm);
+                const jsonData = Object.fromEntries(formData.entries());
+                //alert(formData)
+                
+                // Replace city ID with city name
+                const cityId = jsonData.city;
+                const citySelect = document.getElementById('id_city');
+                const cityName = citySelect.options[citySelect.selectedIndex].text;
+               // jsonData.city = cityName;
+                alert(cityId)
+        
+                fetch('/create-payment-intent/', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRFToken': csrftoken
+                    },
+                    body: JSON.stringify(jsonData)
+                })
+                .then((response) => response.json())
+                .then((data) => {
+                    stripe.confirmCardPayment(data.client_secret, {
+                        payment_method: {
+                            card: card,
+                            billing_details: {
+                                name: document.getElementById('cardName').value,
+                            },
+                        },
+                    }).then((result) => {
+                        if (result.error) {
+                            document.getElementById('card-errors').textContent = result.error.message;
+                        } else {
+                            if (result.paymentIntent.status === 'succeeded') {
+                                console.log('Payment succeeded!');
+                                fetch('/submit-user-details/', {
+                                    method: 'POST',
+                                    headers: {
+                                        'Content-Type': 'application/json',
+                                        'X-CSRFToken': csrftoken
+                                    },
+                                    body: JSON.stringify(jsonData)
+                                })
+                                .then((response) => response.json())
+                                .then((data) => {
+                                    window.location.href = `/payment-success/?payment_intent=${result.paymentIntent.id}`;
+                                })
+                                .catch((error) => {
+                                    console.error('Error:', error);
+                                });
+                            }
+                        }
+                    });
+                })
+                .catch((error) => {
+                    console.error('Error:', error);
+                });
+            }
+        } {% endcomment %}
+        
+        function togglePaymentMethod() {
+          const paymentMethod = document.querySelector('input[name="paymentMethod"]:checked').value;
+          if (paymentMethod === "stripe") {
+            document.getElementById("stripeMessage").style.display = "block";
+            document.getElementById("stripeDetails").style.display = "block";
+            document.getElementById("cashDetails").style.display = "none";
+          } else {
+            document.getElementById("stripeMessage").style.display = "none";
+            document.getElementById("stripeDetails").style.display = "none";
+            document.getElementById("cashDetails").style.display = "block";
+          }
         }
+      
+        function closeModal() {
+          document.getElementById('paymentModal').style.display = 'none';
+        }
+      
+        function openModal() {
+          document.getElementById('paymentModal').style.display = 'block';
+        }
+      
+        togglePaymentMethod();
+      </script>
 
-        // Add the new skill to the primary skill dropdown
-        const primarySkillSelect = document.getElementById('primary-skill');
-        const newOption = document.createElement('option');
-        newOption.value = newSkill;
-        newOption.text = newSkill;
-        primarySkillSelect.add(newOption);
-
-        // Clear the input and hide the add skill container
-        document.getElementById('new-skill').value = '';
-        document.getElementById('add-skill-container').style.display = 'none';
-
-        // Optionally, select the new skill in the dropdown
-        primarySkillSelect.value = newSkill;
-    }
-</script>
-</body>
-</html>
+      <script>
+       document.addEventListener('DOMContentLoaded', function() {
+            //alert("hi")
+            const serviceSelect = document.getElementById('service');
+            serviceSelect.addEventListener('change', updateSummary);
+        
+            const paymentButton = document.getElementById('paymentButton');
+            paymentButton.addEventListener('click', handlePayment);
+        
+            // Fetch exchange rate and update summary
+            const countrySelect = document.getElementById('id_country');
+            countrySelect.addEventListener('change', updateSummary);
+        });
+        
+        function updateSummary() {
+            const serviceSelect = document.getElementById('service');
+            const serviceId = serviceSelect.value;
+            const countrySelect = document.getElementById('id_country');
+            const countryCode = countrySelect.value;
+        
+            if (serviceId) {
+                fetch(`/get-service-price/${serviceId}/`)
+                    .then(response => response.json())
+                    .then(data => {
+                        const servicePriceUSD = data.price;
+                        document.getElementById('pricing').textContent = `Pricing: $${servicePriceUSD}`;
+        
+                        if (countryCode) {
+                            fetch(`/get-currency-code/${countryCode}/`)
+                                .then(response => response.json())
+                                .then(data => {
+                                    const currencyCode = data.currency_code;
+                                    return fetch(`https://api.exchangerate-api.com/v4/latest/USD`);
+                                })
+                                .then(response => response.json())
+                                .then(data => {
+                                    const exchangeRate = data.rates[currencyCode];
+                                    const convertedAmount = (servicePriceUSD * exchangeRate).toFixed(2);
+                                    document.getElementById('total').textContent = `Total: ${convertedAmount} ${currencyCode}`;
+                                })
+                                .catch(error => {
+                                    console.error('Error fetching exchange rate:', error);
+                                });
+                        } else {
+                            document.getElementById('total').textContent = `Total: $${servicePriceUSD} USD`;
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error fetching service price:', error);
+                    });
+            }
+        } 
+       
+        

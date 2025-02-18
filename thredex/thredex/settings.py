@@ -38,7 +38,12 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'core',
+    'experts',
     'django_countries',
+    'cities_light',
+    'import_export',
+    
+
 ]
 
 MIDDLEWARE = [
@@ -134,3 +139,8 @@ import os
 # GEOIP_PATH = os.path.join(BASE_DIR, 'geoip')  # Set the path to the GeoLite2-Country.mmdb file
 GEOIP_CITY_PATH = os.path.join(BASE_DIR, 'geoip_city')
 GEONAMES_USERNAME = "shifana"
+
+CITIES_LIGHT_DOWNLOADS_FOLDER = BASE_DIR / "cities_light_downloads"
+
+STRIPE_SECRET_KEY="sk_test_51Pd6TmRpdtLBtGkSRiytj4NczLUytzM8gDilxjV7pT77QFze40E8804XgEA1P4I86jfa7uav0acP5uAm7LqbYywY00MVE6Bthl"
+STRIPE_PUBLISHABLE_KEY ="pk_test_51Pd6TmRpdtLBtGkSLpxfBNHRQSoDa7AViqgko0v76clZ3PWP1w6PoXCEJB9PQigQdb8jtvwlCs1M7zzlziiqQJBt00bwhVFPau"

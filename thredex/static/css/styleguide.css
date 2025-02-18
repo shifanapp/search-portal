@@ -153,3 +153,16 @@ background-color: #f0f0f0;
       font-size: 16px;
       box-sizing: border-box;
     }
+    @media (min-width: 992px) {
+      .form-section {
+          padding: 40px;
+          box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+          border-radius: 8px;
+      }
+      .basic_container {
+          background-color: #f9f9f9;
+          padding: 30px;
+      }
+  }
+  
+ 

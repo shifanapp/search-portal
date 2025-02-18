@@ -1,0 +1,182 @@
+{% load static %}<!DOCTYPE html>
+<html lang="en">
+{% block head_layout %}
+    {% include "core/head_layout.html" %}
+{% endblock head_layout %}
+  <style>
+    .pagination {
+      display: flex;
+      justify-content: center; /* Center horizontally */
+      align-items: center; /* Align vertically */
+      margin: 20px 0;
+      gap: 10px;
+      flex-wrap: wrap; /* Ensures wrapping on smaller screens */
+  }
+  
+  .pagination a, .pagination span {
+      display: inline-block;
+      padding: 10px 15px;
+      background: #007bff;
+      color: white;
+      text-decoration: none;
+      border-radius: 5px;
+      font-weight: bold;
+      text-align: center;
+      min-width: 80px; /* Ensures uniform button size */
+  }
+  
+  .pagination a:hover {
+      background: #0056b3;
+  }
+  
+  .pagination span {
+      background: transparent;
+      color: #333;
+  }
+  
+  /* Mobile View */
+  @media (max-width: 768px) {
+      .pagination {
+          gap: 5px; /* Reduce space between buttons */
+          margin: 10px 0;
+      }
+  
+      .pagination a, .pagination span {
+          padding: 8px 12px;
+          font-size: 14px;
+          min-width: 70px;
+      }
+  }
+  
+</style> 
+  <body>
+
+    <!-- Header Section Start -->
+    <header id="home" class="hero-area"> 
+      <!-- Navbar Start -->
+      {% block navbar %}
+      {% include "core/navbar_menu.html" %}
+   {% endblock navbar %}
+   
+      <!-- Navbar End -->            
+    </header>
+    <!-- Header Section End --> 
+
+    <!-- Page Header Start -->
+    <div class="page-header">
+      <div class="container">
+        <div class="row">         
+          <div class="col-lg-8 col-md-6 col-xs-12">
+            <div class="breadcrumb-wrapper">
+              <div class="img-wrapper">
+                <img src="assets/img/about/company-logo.png" alt="">
+              </div>
+              <div class="content">
+                <h3 class="product-title">Hiring UI Designer</h3>
+                <p class="brand">UIDeck Inc.</p>
+                <div class="tags">  
+                  <span><i class="lni-map-marker"></i> New York</span>  
+                  <span><i class="lni-calendar"></i> Posted 26 June, 2020</span>  
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-6 col-xs-12">
+            <div class="month-price">
+              <span class="year">Yearly</span>
+              <div class="price">$65,000</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div> 
+    <!-- Page Header End --> 
+
+    <!-- Job Detail Section Start -->  
+    
+    <!-- Job Detail Section End --> 
+    
+    <!-- Featured Section Start -->
+    <section id="featured" class="section bg-gray pb-45">
+      <div class="container">
+        <h4 class="small-title text-left">Experts in {{ category.name }}</h4>
+        <div class="row">
+          {% for user in page_obj %}
+          <div class="col-lg-6 col-md-12 col-xs-12">
+            <a class="job-listings-featured" href="job-details.html">
+              <div class="row">
+                <div class="col-lg-6 col-md-6 col-xs-12">
+                  <div class="job-company-logo">
+                    <img src="assets/img/features/img1.png" alt="">
+                  </div>
+                  <div class="job-details">
+                    <h3>{{ user.full_name }}</h3>
+                    <span class="company-name">{{ user.service.service_name }}</span>
+                    <div class="tags">  
+                      <span><i class="lni-map-marker"></i> {{country_obj.name}}</span>  
+                      <span><i class="lni-map-marker"></i> {{user.city}}</span>  
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-xs-12 text-right">
+                  <div class="tag-type">
+                    <sapn class="heart-icon">
+                      <i class="lni-heart"></i>
+                    </sapn>
+                    <span class="full-time">Full Time</span>
+                  </div>
+                </div>
+              </div>
+            </a>
+          </div>
+          {% empty %}
+          <p class="text-center mt-4">No freelancers found in this category.</p>
+      {% endfor %}     
+       </div>
+      </div>
+      <!-- Pagination Controls -->
+<div class="pagination">
+  {% if page_obj.has_previous %}
+      <a href="?page=1">&laquo; First</a>
+      <a href="?page={{ page_obj.previous_page_number }}">Previous</a>
+  {% endif %}
+
+  <span>Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</span>
+
+  {% if page_obj.has_next %}
+      <a href="?page={{ page_obj.next_page_number }}">Next</a>
+      <a href="?page={{ page_obj.paginator.num_pages }}">Last &raquo;</a>
+  {% endif %}
+</div>
+    </section>
+    <!-- Featured Section End -->
+
+    <!-- Footer Section Start -->
+     {% include "core/footer.html" %}
+    <!-- Footer Section End -->  
+
+    <!-- Go To Top Link -->
+    <a href="#" class="back-to-top">
+      <i class="lni-arrow-up"></i>
+    </a> 
+
+    <!-- Preloader -->
+    <div id="preloader">
+      <div class="loader" id="loader-1"></div>
+    </div>
+    <!-- End Preloader -->
+
+    <!-- jQuery first, then Tether, then Bootstrap JS. -->
+    <script src="{% static 'js/jquery-min.js' %}"></script>
+    <script src="{% static 'js/popper.min.js' %}"></script>
+
+    <script src="{% static 'js/owl.carousel.min.js' %}"></script>     
+    <script src="{% static 'js/jquery.slicknav.js' %}"></script>     
+    <script src="{% static 'js/jquery.counterup.min.js' %}"></script>      
+    <script src="{% static 'js/waypoints.min.js' %}"></script>     
+    <script src="{% static 'js/form-validator.min.js' %}"></script>
+    <script src="{% static 'js/contact-form-script.js' %}"></script>   
+    <script src="{% static 'js/main.js' %}"></script>
+    
+  </body>
+</html>

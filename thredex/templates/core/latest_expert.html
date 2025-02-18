@@ -1,0 +1,33 @@
+{% load static %}
+<section id="latest-jobs" class="section bg-gray">
+    <div class="container">
+      <div class="section-header">  
+        <h2 class="section-title">Latest experts</h2>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit ellentesque dignissim quam et <br> metus effici turac fringilla lorem facilisis.</p>       
+      </div>
+      <div class="row">
+        {% for user_detail in user_details %}
+        <div class="col-lg-6 col-md-12 col-xs-12">
+          <div class="jobs-latest">
+            <div class="img-thumb">
+              <img src="{% static 'img/features/img-1.jpg' %}" alt="">
+            </div>
+            <div class="content">
+              <h3><a href="job-details.html">{{ user_detail.service }}</a></h3>
+              <h3><i class="lni-user"></i> {{ user_detail.full_name }}</h3>
+              <div class="tags">  
+                <span><i class="lni-map-marker"></i> {{ user_detail.country_name }}</span>
+                <span><i class="lni-map-marker"></i>  {{ user_detail.city }}</span> 
+              </div>
+              {% comment %} <div class="tag mb-3"><i class="lni-tag"></i> #Html #Css #PHP</div> {% endcomment %}
+              {% comment %} <span class="full-time">Full Time</span> {% endcomment %}
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+        <div class="col-12 text-center mt-4">
+          <a href="job-page.html" class="btn btn-common">Browse All Jobs</a>
+        </div>
+      </div>
+    </div>
+  </section>

@@ -1,0 +1,212 @@
+/* Sidebar Styling */
+.sidebar {
+    background-color: #343a40;
+    min-height: 100vh;
+    padding: 20px;
+    color: #fff;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 250px;
+    transition: transform 0.3s ease-in-out;
+}
+.sidebar a {
+    display: block;
+    padding: 12px;
+    color: #dcdcdc;
+    text-decoration: none;
+    border-radius: 5px;
+    margin-bottom: 5px;
+  }
+.sidebar a:hover, .sidebar a.active {
+    background-color: #5a67d8; 
+    color: #fff;
+}
+
+/*
+* Close Button (✖) */
+.close-btn {
+  display: none;
+  background: none;
+  border: none;
+  color: white;
+  font-size: 24px;
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .close-btn {
+    display: block;
+  }
+}
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .sidebar {
+    position: fixed;
+    width: 250px;
+    left: -250px;
+    top: 0;
+    bottom: 0;
+    transition: left 0.3s ease-in-out;
+    z-index: 1000;
+  }
+  .sidebar.active {
+    left: 0;
+  }
+  .sidebar-toggle {
+    display: block;
+    background: none;
+    border: none;
+    color: black; /* Ensuring visibility */
+    font-size: 24px;
+    position: absolute;
+    top: 1px;
+    left: 15px;
+  }
+}
+
+/* Sidebar Toggle Button */
+
+
+/* Main Content */
+.main-content {
+    padding: 20px;
+    background-color: #f8f9fa;
+    min-height: 100vh;
+    margin-left: 250px;
+    transition: margin-left 0.3s ease-in-out;
+    width: calc(100% - 250px); /* Ensure content fills remaining space */
+}
+@media (max-width: 768px) {
+    .main-content {
+        margin-left: 0;
+        width: 100%; /* Full width when sidebar is hidden */
+    }
+}
+
+/* Stats Cards */
+.stats-card {
+    padding: 20px;
+    color: #fff;
+    text-align: center;
+    border-radius: 10px;
+    margin-bottom: 15px;
+
+}
+.stats-blue { background-color: #007bff; }
+.stats-green { background-color: #28a745; }
+.stats-purple { background-color: #6f42c1; }
+
+/* Job Summary */
+.summary-box {
+    background: #fff;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Job Updates */
+.job-card {
+    background: #fff;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 15px;
+}
+.chart-bar {
+    height: 150px;
+    width: 100%;
+  }
+/* Company Profile Styling */
+.profile-header {
+    display: flex;
+    align-items: center;
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.company-logo {
+    width: 100px;
+    height: 100px;
+    border-radius: 10px;
+    object-fit: contain;
+}
+
+.company-name {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.company-website a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.contact-section {
+    margin-top: 20px;
+}
+
+.contact-section a {
+    display: block;
+    margin-bottom: 5px;
+    color: #333;
+    text-decoration: none;
+}
+
+.tech-stack {
+    margin-top: 20px;
+}
+
+.tech-icons img {
+    width: 50px;
+    margin: 5px;
+}
+
+.working-section img {
+    width: 100%;
+    border-radius: 10px;
+}
+
+.team-cards {
+    display: flex;
+    gap: 15px;
+}
+
+.team-card {
+    text-align: center;
+    padding: 10px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.team-card img {
+    width: 80px;
+    border-radius: 50%;
+}
+
+.benefits {
+    display: flex;
+    gap: 15px;
+}
+
+.benefit-item {
+    text-align: center;
+    padding: 10px;
+}
+
+.job-listing {
+    margin-top: 20px;
+}
+
+.job-card {
+    background: #fff;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}

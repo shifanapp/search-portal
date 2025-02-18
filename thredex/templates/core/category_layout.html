@@ -1,0 +1,35 @@
+
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/styles.css' %}" type="text/css">
+
+<section class="category section bg-gray">
+    <div class="container">
+      <div class="section-header">  
+        <h2 class="section-title">Browse Categories</h2>
+        <p>Most popular categories of portal, sorted by popularity</p>
+      </div>
+      <div class="row">   
+        {% comment %} <div class="col-lg-3 col-md-6 col-xs-12 f-category">
+          <a href=" {% url 'category_result' %}">
+            <div class="category-card">
+                <img src="{% static 'img/professional.webp' %}" alt="Maintenance">
+            </div>
+            <h3>Professional</h3>
+            {% comment %} <p>(4286 jobs)</p> {% endcomment %}
+          </a>
+        {% comment %} </div>  {% endcomment %}
+        {% for category in categories %}
+        <div class="col-lg-3 col-md-6 col-xs-12 f-category">
+          <a href="{% url 'category_result' category.id %}" >
+            <div class="category-card">
+                <img src="{{ category.image_url.url }}" >
+            </div>
+            <h3>{{ category.name }}</h3>
+            {% comment %} <p>(2000 jobs)</p> {% endcomment %}
+          </a>
+        </div>
+        {% endfor %}
+       
+      </div>
+    </div>
+  </section>
