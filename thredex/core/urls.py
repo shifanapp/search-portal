@@ -25,8 +25,13 @@ urlpatterns = [
     path('get-cities/', views.get_cities, name='get_cities'),  # URL for the AJAX call
     path('signup/', views.signup, name='signup'),  
     path('login/', views.login, name='login'),
+    path('about/', views.about, name='about'),
+    path('contact/', views.contact, name='contact'),
+    # path('category_result/', views.category_result, name='category_result'),
+     path('category/<int:category_id>/', views.category_result, name='category_result'),
 
 
+    path('search-users/', views.search_users, name='search_users'),
 
 
     # path('about/', views.about, name='about'),   # About Page

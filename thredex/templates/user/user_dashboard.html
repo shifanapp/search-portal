@@ -1,0 +1,377 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="{% static 'css/user_dashboard_style.css' %}" type="text/css">
+</head>
+<body>
+
+<!-- Sidebar Toggle Button (Mobile) -->
+<button class="sidebar-toggle" onclick="toggleSidebar()">☰</button>
+
+<div class="container-fluid">
+    <div class="row">
+        <!-- Sidebar -->
+        <div class="col-md-3 sidebar">
+            <button class="close-btn" onclick="toggleSidebar()">✖</button>
+            <h4>Thredex</h4>
+            <a  onclick="showSection('dashboard', this)" class="nav-link active">Dashboard</a>
+            <a  onclick="showSection('messages', this)" class="nav-link">Messages</a>
+            <a  onclick="showSection('company-profile', this)" class="nav-link">Company Profile</a>
+            <a  onclick="showSection('saved-freelancers', this)" class="nav-link">Saved Freelancers</a>
+            <a  onclick="showSection('job-listing', this)" class="nav-link">Job Listing</a>
+            <a  onclick="showSection('schedule', this)" class="nav-link">My Schedule</a>
+            <a  onclick="showSection('settings', this)" class="nav-link">Settings</a>
+            <a  onclick="showSection('help-center', this)" class="nav-link">Help Center</a>
+            <div class="logout-section">
+              <a href="{% url 'logout' %}" id="logoutBtn" class="logout-btn">
+                  <i class="fas fa-sign-out-alt"></i> Logout
+              </a>
+          </div>
+          </div>
+
+
+        <!-- Main Content -->
+        <div class="col-lg-9 col-md-8 col-sm-12 main-content">
+            
+            <!-- Dashboard Section -->
+            <div id="dashboard" class="content-section active">
+                <h2>Dashboard</h2>
+                <div class="row">
+                    <div class="col-lg-4 col-md-6 col-sm-12">
+                        <div class="stats-card stats-blue">
+                            <h3>3</h3>
+                            <p>Saved Freelancers</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 col-sm-12">
+                        <div class="stats-card stats-green">
+                            <h3>3</h3>
+                            <p>Recent Searches</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 col-sm-12">
+                        <div class="stats-card stats-purple">
+                            <h3>24</h3>
+                            <p>Messages Received</p>
+                        </div>
+                    </div>
+                    <div class="row mt-4">
+                      <div class="col-lg-8 col-md-12">
+                          <div class="summary-box">
+                              <h5>Job Statistics</h5>
+                              <canvas id="jobStatsChart"></canvas>
+                          </div>
+                      </div>
+                      <div class="col-lg-4 col-md-12">
+                          <div class="summary-box">
+                              <h5>Job Open</h5>
+                              <h3>12</h3>
+                              <p>Jobs Opened</p>
+                          </div>
+                          <div class="summary-box mt-3">
+                              <h5>Applicants Summary</h5>
+                              <p>Full-Time: 45</p>
+                              <p>Internship: 32</p>
+                              <p>Part-Time: 24</p>
+                              <p>Contract: 30</p>
+                              <p>Remote: 22</p>
+                          </div>
+                      </div>
+                  </div>
+      
+                  <!-- Job Updates -->
+                  <div class="mt-4">
+                      <h5>Job Updates</h5>
+                      <div class="row">
+                          <div class="col-md-4 col-sm-6">
+                              <div class="job-card">
+                                  <h6>Social Media Assistant</h6>
+                                  <p>Location: Paris, France</p>
+                                  <span class="badge bg-warning">Marketing</span>
+                              </div>
+                          </div>
+                          <div class="col-md-4 col-sm-6">
+                              <div class="job-card">
+                                  <h6>Brand Designer</h6>
+                                  <p>Location: Paris, France</p>
+                                  <span class="badge bg-success">Business</span>
+                              </div>
+                          </div>
+                          <div class="col-md-4 col-sm-12">
+                              <div class="job-card">
+                                  <h6>Interactive Developer</h6>
+                                  <p>Location: Berlin, Germany</p>
+                                  <span class="badge bg-warning">Marketing</span>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+                </div>
+            </div>
+
+            <!-- Messages Section -->
+            <div id="messages" class="content-section">
+                <h2>Messages</h2>
+                <p>This is the messages section.</p>
+            </div>
+
+            <!-- Company Profile Section -->
+            {% comment %} <div id="company-profile" class="content-section">
+                <h2>Company Profile</h2>
+                <p>This is the company profile section.</p>
+            </div> {% endcomment %}
+            <div id="company-profile" class="content-section">
+              <div class="profile-header d-flex align-items-center">
+                  <img src="https://via.placeholder.com/100" alt="Company Logo" class="me-3">
+                  <div>
+                      <h1>Nomad</h1>
+                      <p>https://nomad.com</p>
+                      <p><strong>Founded:</strong> July 31, 2011 | <strong>Employees:</strong> 4000+ | <strong>Industry:</strong> Social & Non-Profit</p>
+                  </div>
+              </div>
+                <!-- Company Profile Description -->
+    <div class="company-profile my-3">
+      <h4>Company Profile</h4>
+      <p>Nomad is a software platform for starting and running internet businesses. Millions of businesses rely on Nomad’s software tools to accept payments, expand globally, and manage online presence. Nomad is at the forefront of digital commerce, supporting business models from SaaS to marketplaces.</p>
+      <p>We believe in building a global economy driven by technology and innovation. Our team is dedicated to designing advanced solutions to make digital business seamless.</p>
+  </div>
+              <!-- Contact Section -->
+              <div class="contact-icons my-3">
+                  <h4>Contact</h4>
+                  <a href="#"><i class="bi bi-twitter"></i> Twitter</a>
+                  <a href="#"><i class="bi bi-facebook"></i> Facebook</a>
+                  <a href="#"><i class="bi bi-linkedin"></i> LinkedIn</a>
+                  <a href="mailto:nomad@gmail.com"><i class="bi bi-envelope"></i> Email</a>
+              </div>
+          
+              <!-- Tech Stack -->
+              <div class="tech-stack my-3">
+                  <h4>Tech Stack</h4>
+                  <div class="d-flex">
+                      <img src="https://via.placeholder.com/40" alt="HTML">
+                      <img src="https://via.placeholder.com/40" alt="CSS">
+                      <img src="https://via.placeholder.com/40" alt="JavaScript">
+                  </div>
+              </div>
+          
+              <!-- Working Section -->
+              <div class="my-4">
+                  <h4>Working at Nomad</h4>
+                  <div class="row">
+                      <div class="col-md-4">
+                          <img src="https://via.placeholder.com/300x200" class="img-fluid rounded" alt="Working 1">
+                      </div>
+                      <div class="col-md-4">
+                          <img src="https://via.placeholder.com/300x200" class="img-fluid rounded" alt="Working 2">
+                      </div>
+                      <div class="col-md-4">
+                          <img src="https://via.placeholder.com/300x200" class="img-fluid rounded" alt="Working 3">
+                      </div>
+                  </div>
+              </div>
+          
+              <!-- Team Section -->
+              <div class="my-4">
+                  <h4>Team</h4>
+                  <div class="row">
+                      <div class="col-md-3">
+                          <div class="team-card">
+                              <img src="https://via.placeholder.com/80" alt="Team Member">
+                              <h5>Célestin Gardinier</h5>
+                              <p>CEO & Co-Founder</p>
+                          </div>
+                      </div>
+                      <div class="col-md-3">
+                          <div class="team-card">
+                              <img src="https://via.placeholder.com/80" alt="Team Member">
+                              <h5>Reynaud Colbert</h5>
+                              <p>Co-Founder</p>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          
+              <!-- Benefits Section -->
+              <div class="benefits my-4">
+                  <h4>Benefits</h4>
+                  <div class="row">
+                      <div class="col-md-3 text-center">
+                          <i class="bi bi-heart"></i>
+                          <h5>Full Healthcare</h5>
+                          <p>We believe in thriving communities and happy teams.</p>
+                      </div>
+                      <div class="col-md-3 text-center">
+                          <i class="bi bi-airplane"></i>
+                          <h5>Unlimited Vacation</h5>
+                          <p>Flexible schedules for wellness and fun.</p>
+                      </div>
+                  </div>
+              </div>
+          
+              <!-- Open Positions -->
+              <div class="my-4">
+                  <h4>Open Positions</h4>
+                  <div class="job-card">
+                      <h5>Social Media Assistant</h5>
+                      <p><strong>Location:</strong> Paris, France | <strong>Type:</strong> Full-Time</p>
+                  </div>
+                  <div class="job-card">
+                      <h5>Brand Designer</h5>
+                      <p><strong>Location:</strong> San Francisco, USA | <strong>Type:</strong> Full-Time</p>
+                  </div>
+              </div>
+              
+            </div>
+            <!-- Saved Freelancers Section -->
+            <div id="saved-freelancers" class="content-section">
+                <h2>Saved Freelancers</h2>
+                <p>This is the saved freelancers section.</p>
+            </div>
+
+            <!-- Job Listing Section -->
+            <div id="job-listing" class="content-section">
+                <h2>Job Listing</h2>
+                <p>This is the job listing section.</p>
+            </div>
+
+            <!-- Schedule Section -->
+            <div id="schedule" class="content-section">
+                <h2>My Schedule</h2>
+                <p>This is the schedule section.</p>
+            </div>
+
+            <!-- Settings Section -->
+            <div id="settings" class="content-section">
+                <h2>Settings</h2>
+                <p>This is the settings section.</p>
+            </div>
+
+            <!-- Help Center Section -->
+            <div id="help-center" class="content-section">
+                <h2>Help Center</h2>
+                <p>This is the help center section.</p>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- JavaScript -->
+<script>
+    function toggleSidebar() {
+        document.querySelector(".sidebar").classList.toggle("active");
+    }
+
+    function showSection(sectionId, element) {
+        // Hide all sections
+        document.querySelectorAll(".content-section").forEach(section => {
+            section.style.display = "none";
+        });
+
+        // Show selected section
+        document.getElementById(sectionId).style.display = "block";
+
+        // Remove active class from all sidebar links
+        document.querySelectorAll(".sidebar a").forEach(link => {
+            link.classList.remove("active");
+        });
+
+        // Add active class to clicked link
+        element.classList.add("active");
+    }
+
+    // Show only the dashboard initially
+    document.addEventListener("DOMContentLoaded", function() {
+        showSection('dashboard', document.querySelector(".sidebar a.active"));
+    });
+</script>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+      var ctx = document.getElementById('jobStatsChart').getContext('2d');
+
+      new Chart(ctx, {
+          type: 'bar',
+          data: {
+              labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+              datasets: [{
+                  label: 'Job Views',
+                  data: [120, 180, 150, 130, 160, 90, 70],
+                  backgroundColor: 'rgba(54, 162, 235, 0.7)'
+              }, {
+                  label: 'Jobs Applied',
+                  data: [50, 75, 60, 55, 90, 40, 30],
+                  backgroundColor: 'rgba(255, 99, 132, 0.7)'
+              }]
+          },
+          options: {
+              responsive: true,
+              scales: {
+                  y: {
+                      beginAtZero: true
+                  }
+              }
+          }
+      });
+  });
+ // Function to handle section changes
+function showSection(sectionId, element) {
+  // Hide all sections
+  document.querySelectorAll(".content-section").forEach(section => {
+      section.style.display = "none";
+  });
+
+  // Show the selected section
+  const activeSection = document.getElementById(sectionId);
+  if (activeSection) {
+      activeSection.style.display = "block";
+  }
+
+  // Remove 'active' class from all sidebar links
+  document.querySelectorAll(".sidebar a").forEach(link => {
+      link.classList.remove("active");
+  });
+
+  // Add 'active' class to the clicked link
+  if (element) {
+      element.classList.add("active");
+  }
+
+  // Update the URL without reloading the page
+  const newUrl = `/user/${sectionId}`;
+  history.pushState({ section: sectionId }, "", newUrl);
+}
+
+// Handle browser back/forward navigation
+window.addEventListener("popstate", function (event) {
+  if (event.state && event.state.section) {
+      showSection(event.state.section, document.querySelector(`[onclick="showSection('${event.state.section}', this)"]`));
+  } else {
+      // Default to dashboard if no history state
+      showSection("dashboard", document.querySelector(`[onclick="showSection('dashboard', this)"]`));
+  }
+});
+
+// Show the correct section on page load
+document.addEventListener("DOMContentLoaded", function () {
+  const currentPath = window.location.pathname.split("/").pop(); // Get last part of the URL
+  const defaultSection = currentPath || "dashboard"; // Default to 'dashboard' if no section in URL
+  const activeLink = document.querySelector(`[onclick="showSection('${defaultSection}', this)"]`);
+
+  if (activeLink) {
+      showSection(defaultSection, activeLink);
+  }
+});
+
+</script>
+</body>
+</html>

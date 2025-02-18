@@ -1,0 +1,400 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard with Dynamic Content</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="{% static 'css/expert_dashboard_style.css' %}" type="text/css">
+<!-- FontAwesome Icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+</head>
+<body>
+
+<!-- Sidebar Toggle Button (for Mobile) -->
+<button class="sidebar-toggle d-md-none" onclick="toggleSidebar()">☰</button>
+
+<div class="container-fluid">
+  <div class="row">
+    <!-- Sidebar -->
+    <div class="col-md-3 sidebar"><!-- Close Button -->
+      <button class="close-btn" onclick="toggleSidebar()">✖</button>
+      <h4>Thredex</h4>
+      <a href="#" onclick="showSection('dashboard')" class="active">Dashboard</a>
+      <a href="#" onclick="showSection('messages')">Messages</a>
+      <a href="#" onclick="showSection('publicProfile')">My Public Profile</a>
+      <hr> <!-- Separator -->
+      <h6>Settings</h6>
+      <a href="#" onclick="showSection('settings')">Settings</a>
+      <a href="#">Help Center</a>
+      <!-- Logout Button -->
+      <div class="logout-section">
+        <a href="{% url 'logout' %}" id="logoutBtn" class="logout-btn">
+            <i class="fas fa-sign-out-alt"></i> Logout
+        </a>
+    </div>
+    
+    
+      <div class="mt-5">
+        <img src="https://via.placeholder.com/50" class="rounded-circle" alt="Profile">
+        <p class="mt-2">Jake Gyll<br><small>jakegyll@email.com</small></p>
+      </div>
+    {% comment %} </div> {% endcomment %}
+    </div>
+
+    <!-- Main Content -->
+    <div class="col-md-9 main-content">
+      <!-- Dashboard Section -->
+      <div id="dashboard" class="content-section active">
+        <div class="d-flex justify-content-between align-items-center">
+          <h2>Dashboard</h2>
+          <button class="btn btn-outline-secondary">Jul 19 - Jul 25</button>
+        </div>
+        <p class="profile-completion">Good morning, Jake! Your profile is 75% complete. Let’s make it stand out!</p>
+
+        <!-- Stats Row -->
+        <div class="row">
+          <div class="col-md-4">
+            <div class="stats-card">
+              <h4>Total Jobs Applied</h4>
+              <h2>45</h2>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="stats-card">
+              <h4>Profile View Status</h4>
+              <div class="progress-ring mx-auto">
+                <div class="progress-ring-text">60% Client View</div>
+              </div>
+              <p>40% Interviewed</p>
+              <a href="#" class="text-decoration-none">View All Applications →</a>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="stats-card">
+              <h4>Upcoming Interviews</h4>
+              <div class="d-flex align-items-center mt-3">
+                <p>Today, 26 November</p>
+                <div>
+                  <strong>10:30 AM</strong><br>
+                  <small>Joe Bartmann</small><br>
+                  <small>HR Manager at Divvy</small>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Profile View History -->
+        <div class="profile-history-card">
+          <h4>Recent Profile View History</h4>
+          <div class="d-flex justify-content-between align-items-center my-3">
+            <div class="d-flex align-items-center">
+              <img src="https://via.placeholder.com/40" alt="Company Logo" class="me-3">
+              <div>
+                <strong>Nomad</strong><br>
+                <small>Paris, France</small>
+              </div>
+            </div>
+            <span class="viewed-status">Date Viewed: 24 July 2021</span>
+            <span class="status-badge status-liked">Liked</span>
+          </div>
+          <a href="#" class="text-decoration-none">View all applications history →</a>
+        </div>
+      </div>
+
+      <!-- Messages Section -->
+      <div id="messages" class="content-section">
+        <h2>Messages</h2>
+        <p>You have new messages. Check your inbox and respond to messages from recruiters.</p>
+      </div>
+
+      <!-- Public Profile Section -->
+     <!-- Public Profile Section -->
+     <div id="publicProfile" class="content-section" style="display: none;">
+      <div class="profile-container">
+        <div class="main-content">
+          <div class="profile-header text-center">
+            <img src="https://via.placeholder.com/100" class="rounded-circle" alt="Profile Picture">
+            <h3>Jake Gyll</h3>
+            <p>Product Designer at Twitter <br><small>Manchester, UK</small></p>
+            <button class="btn btn-outline-success btn-sm">Open for Opportunities</button>
+            <span class="edit-btn">Edit Profile</span>
+          </div>
+
+          <!-- About Me -->
+          <div class="section">
+            <h4>About Me</h4>
+            <span class="edit-btn">Edit</span>
+            <p>I'm a product designer and filmmaker currently working remotely at Twitter from Manchester.</p>
+          </div>
+
+          <!-- Experience -->
+          <div class="section">
+            <h4>Experience</h4>
+            <span class="edit-btn">Edit</span>
+            <div class="experience-item mb-3">
+              <h5>Product Designer</h5>
+              <p class="text-muted">Twitter • Full-Time • Jun 2019 - Present</p>
+              <p>Developed a social media plan for 10 brands to increase engagement and leads.</p>
+            </div>
+            <div class="experience-item mb-3">
+              <h5>UI/UX Designer</h5>
+              <p class="text-muted">Facebook • Contract • Jan 2017 - May 2019</p>
+              <p>Worked on enhancing user interaction designs for Facebook's mobile app.</p>
+            </div>
+          </div>
+
+          <!-- Education -->
+          <div class="section">
+            <h4>Education</h4>
+            <span class="edit-btn">Edit</span>
+            <div class="education-item mb-3">
+              <h5>Bachelor of Design</h5>
+              <p class="text-muted">University of Arts, London • 2013 - 2017</p>
+            </div>
+          </div>
+
+          <!-- Skills -->
+          <div class="section">
+            <h4>Skills</h4>
+            <span class="add-btn">+ Add</span>
+            <div class="skills">
+              <span class="skill-badge">Communication</span>
+              <span class="skill-badge">Analytics</span>
+              <span class="skill-badge">UI/UX Design</span>
+            </div>
+          </div>
+
+          <!-- Portfolio -->
+          <div class="section">
+            <h4>Portfolio</h4>
+            <span class="add-btn">+ Add Project</span>
+            <div class="portfolios">
+              <div class="portfolio-item">
+                <img src="https://via.placeholder.com/150" alt="Project Image">
+                <p class="text-muted">Project Title 1</p>
+              </div>
+              <div class="portfolio-item">
+                <img src="https://via.placeholder.com/150" alt="Project Image">
+                <p class="text-muted">Project Title 2</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Column (Social Links and Additional Details) -->
+        <div class="sidebar_right">
+          <div class="section">
+            <h4>Social Links</h4>
+            <span class="edit-btn">Edit</span>
+            <div class="social-links">
+              <a href="#">LinkedIn</a>
+              <a href="#">Twitter</a>
+              <a href="#">GitHub</a>
+            </div>
+          </div>
+          <div class="section">
+            <h4>Additional Details</h4>
+            <span class="edit-btn">Edit</span>
+            <p><strong>Languages:</strong> English, French, Spanish</p>
+            <p><strong>Interests:</strong> Filmmaking, Traveling</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--Setting Section-->
+<div id="settings" class="content-section">
+  {% comment %} <div class="profile-container"> {% endcomment %}
+    <!-- Left Column (Main Profile Content) -->
+      <div class="main-content">
+          <div class="d-flex justify-content-between align-items-center mb-4">
+              <h2>Settings</h2>
+              <button class="btn btn-outline-secondary">Back to homepage</button>
+          </div>
+
+            <!-- Tabs -->
+          <ul class="nav nav-tabs" id="settingsTabs" role="tablist">
+              <li class="nav-item">
+                  <a class="nav-link active" id="profile-tab" data-toggle="tab" href="#profile" role="tab">My Profile</a>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link" id="login-tab" data-toggle="tab" href="#login" role="tab">Login Details</a>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link" id="notifications-tab" data-toggle="tab" href="#notifications" role="tab">Notifications</a>
+              </li>
+          </ul>
+          <div class="tab-content" id="settingsTabsContent">
+              <!-- My Profile Tab -->
+              <div class="tab-pane fade show active" id="profile" role="tabpanel">
+                  <div class="form-section">
+                      <h5>Basic Information</h5>
+                      <p>This is your personal information that you can update anytime.</p>
+
+                      <div class="profile-photo-section">
+                          <img src="https://via.placeholder.com/100" alt="Profile" class="profile-photo">
+                          <div class="upload-photo">
+                              <p>Click to replace or drag and drop</p>
+                              <small>SVG, PNG, JPG or GIF (max. 400 x 400px)</small>
+                          </div>
+                      </div>
+
+                      <form>
+                          <div class="form-group">
+                              <label for="fullName">Full Name</label>
+                              <input type="text" class="form-control" id="fullName" value="Jake Gyll" required>
+                          </div>
+                          <div class="form-row">
+                              <div class="form-group col-md-6">
+                                  <label for="phoneNumber">Phone Number</label>
+                                  <input type="text" class="form-control" id="phoneNumber" value="+44 1245 572 135" required>
+                              </div>
+                              <div class="form-group col-md-6">
+                                  <label for="email">Email</label>
+                                  <input type="email" class="form-control" id="email" value="jakegyll@gmail.com" required>
+                              </div>
+                          </div>
+                          <div class="form-row">
+                              <div class="form-group col-md-6">
+                                  <label for="dob">Date of Birth</label>
+                                  <input type="date" class="form-control" id="dob" value="1997-08-09" required>
+                              </div>
+                              <div class="form-group col-md-6">
+                                  <label for="gender">Gender</label>
+                                  <select id="gender" class="form-control" required>
+                                      <option selected>Male</option>
+                                      <option>Female</option>
+                                      <option>Other</option>
+                                  </select>
+                              </div>
+                          </div>
+
+                          <div class="account-type">
+                              <h5>Account Type</h5>
+                              <p>You can update your account type</p>
+                              <div class="form-check">
+                                  <input class="form-check-input" type="radio" name="accountType" id="jobSeeker" checked>
+                                  <label class="form-check-label" for="jobSeeker">
+                                      Job Seeker - Looking for a job
+                                  </label>
+                              </div>
+                              <div class="form-check">
+                                  <input class="form-check-input" type="radio" name="accountType" id="employer">
+                                  <label class="form-check-label" for="employer">
+                                      Employer - Hiring, sourcing candidates, or posting jobs
+                                  </label>
+                              </div>
+                          </div>
+
+                          <button type="submit" class="btn btn-primary mt-3">Save Profile</button>
+                      </form>
+                  </div>
+              </div>
+
+              <!-- Login Details Tab -->
+              <div class="tab-pane fade" id="login" role="tabpanel">
+                  <div class="form-section">
+                      <h5>Basic Information</h5>
+                      <p>This is login information that you can update anytime.</p>
+                      <form>
+                          <div class="form-group">
+                              <label>Update Email</label>
+                              <input type="email" class="form-control" placeholder="Enter your new email">
+                              <button type="button" class="btn btn-primary mt-2">Update Email</button>
+                          </div>
+                      </form>
+                  </div>
+                  <div class="form-section">
+                      <h5>New Password</h5>
+                      <p>Manage your password to make sure it is safe.</p>
+                      <form>
+                          <div class="form-row">
+                              <div class="form-group col-md-6">
+                                  <label>Old Password</label>
+                                  <input type="password" class="form-control" placeholder="Enter your old password">
+                                  <small class="form-text text-muted">Minimum 8 characters</small>
+                              </div>
+                              <div class="form-group col-md-6">
+                                  <label>New Password</label>
+                                  <input type="password" class="form-control" placeholder="Enter your new password">
+                                  <small class="form-text text-muted">Minimum 8 characters</small>
+                              </div>
+                          </div>
+                          <button type="button" class="btn btn-primary">Change Password</button>
+                      </form>
+                  </div>
+                  <div class="text-right">
+                      <a href="#" class="btn btn-link btn-danger">Close Account</a>
+                  </div>
+              </div>
+
+              <!-- Notifications Tab -->
+              <div class="tab-pane fade" id="notifications" role="tabpanel">
+                  <div class="form-section">
+                      <h5>Basic Information</h5>
+                      <p>This is notifications preferences that you can update anytime.</p>
+
+                      <h5>Notifications</h5>
+                      <p>Customize your preferred notification settings</p>
+                      <form>
+                          <div class="form-group form-check">
+                              <input type="checkbox" class="form-check-input" id="applications" checked>
+                              <label class="form-check-label" for="applications">
+                                  <strong>Applications</strong><br>
+                                  <small>These are notifications for jobs that you have applied to</small>
+                              </label>
+                          </div>
+                          <div class="form-group form-check">
+                              <input type="checkbox" class="form-check-input" id="jobs">
+                              <label class="form-check-label" for="jobs">
+                                  <strong>Jobs</strong><br>
+                                  <small>These are notifications for job openings that suit your profile</small>
+                              </label>
+                          </div>
+                          <div class="form-group form-check">
+                              <input type="checkbox" class="form-check-input" id="recommendations">
+                              <label class="form-check-label" for="recommendations">
+                                  <strong>Recommendations</strong><br>
+                                  <small>These are notifications for personalized recommendations from our recruiters</small>
+                              </label>
+                          </div>
+                          <button type="submit" class="btn btn-primary mt-3">Update Email</button>
+                      </form>
+                  </div>
+              </div>
+          </div>
+                     
+      </div>
+
+     
+</div>
+    </div>
+  </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+<script src="{% static 'js/dashboard.js' %}"></script>
+<script>
+  // Function to show toast
+  function showLogoutToast() {
+      var toastEl = document.getElementById("logoutToast");
+      var toast = new bootstrap.Toast(toastEl);
+      toast.show();
+  }
+
+  // Check if logout was triggered using a cookie
+  window.onload = function () {
+      if (document.cookie.includes("logout_success=true")) {
+          showLogoutToast(); 
+          document.cookie = "logout_success=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+      }
+  };
+</script>
+
+</body>
+</html>

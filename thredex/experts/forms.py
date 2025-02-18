@@ -1,16 +1,31 @@
-# forms.py
 from django import forms
+from cities_light.models import City, Country
+from .models import Location
 
-class FreelancerRegistrationForm(forms.Form):
-    full_name = forms.CharField(max_length=100, required=True, label="Full Name")
-    username = forms.CharField(max_length=100, required=True, label="Username")
-    email = forms.EmailField(required=True, label="E-mail")
-    phone = forms.CharField(max_length=10, required=True, label="Phone No", 
-                            widget=forms.TextInput(attrs={'pattern': '^\d{10}$', 'placeholder': 'Enter your phone number'}))
-    whatsapp = forms.CharField(max_length=10, required=False, label="WhatsApp No", 
-                               widget=forms.TextInput(attrs={'pattern': '^\d{10}$', 'placeholder': 'Enter your WhatsApp number'}))
-    category = forms.ChoiceField(choices=[('', 'Select category'), ('Design', 'Design'), ('Development', 'Development'), ('Writing', 'Writing')], 
-                                 required=True, label="Category")
-    profile_photo = forms.ImageField(required=False, label="Profile Photo")
-    bio = forms.CharField(widget=forms.Textarea, required=False, label="Bio")
-    skills = forms.CharField(required=False, label="Skills")
+class LocationForm(forms.ModelForm):
+    class Meta:
+        model = Location
+        fields = ['country', 'city']
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['city'].queryset = City.objects.none()
+
+        if 'country' in self.data:
+            try:
+                country = self.data.get('country')
+                self.fields['city'].queryset = City.objects.filter(country__code2=country).order_by('name')
+            except (ValueError, TypeError):
+                pass  # Invalid country, show no cities
+
+    def clean_country(self):
+        country = self.cleaned_data.get('country')
+        if not country:
+            raise forms.ValidationError("Please select a country.")
+        return country
+
+    def clean_city(self):
+        city = self.cleaned_data.get('city')
+        if not city:
+            raise forms.ValidationError("Please select a city.")
+        return city

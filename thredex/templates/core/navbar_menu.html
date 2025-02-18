@@ -1,18 +1,114 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="container">
-      <a class="navbar-brand" href="#">Thredex</a>
+{% load static %}
+{% comment %} <nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container">
+      <a class="navbar-brand" href="#">
+        <img src="{% static "img/logo.jpg" %}" alt="Thredex Logo" style="height: 40px;">
+      </a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-        <span class="navbar-toggler-icon"></span>
+          <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ms-auto">
-          <li class="nav-item"><a class="nav-link" href="{% url 'home' %}">Home</a></li>
-          <li class="nav-item"><a class="nav-link" href="#">About Us</a></li>
-          <li class="nav-item"><a class="nav-link" href="">Join Us</a></li>
-          <li class="nav-item"><a class="nav-link" href="{% url 'login' %}">Login</a></li>
-          <li class="nav-item"><a class="nav-link" href="{% url 'signup' %}">Sign Up</a></li>
-
+          <ul class="navbar-nav ms-auto">
+              <li class="nav-item"><a class="nav-link" href="{% url 'home' %}">Home</a></li>
+              <li class="nav-item"><a class="nav-link" href="#">About Us</a></li>
+              <li class="nav-item"><a class="nav-link" href="">Join Us</a></li>
+              <li class="nav-item"><a class="nav-link" href="{% url 'login' %}">Login</a></li>
+              <li class="nav-item"><a class="nav-link" href="{% url 'signup' %}">Sign Up</a></li>
+              <li class="nav-item"><a class="nav-link" href="{% url 'dashboard' %}">My Dashboard</a></li>
+          </ul>
+      </div>
+  </div>
+</nav> {% endcomment %}
+<nav class="navbar navbar-expand-lg fixed-top scrolling-navbar">
+  <div class="container">
+    <div class="theme-header clearfix">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+          <span class="lni-menu"></span>
+          <span class="lni-menu"></span>
+          <span class="lni-menu"></span>
+        </button>
+        <a href="index.html" class="navbar-brand"><img src="{% static "img/logo.jpg" %}" alt="Thredex Logo" style="height: 40px;"></a>
+      </div>
+      <div class="collapse navbar-collapse" id="main-navbar">
+        <ul class="navbar-nav mr-auto w-100 justify-content-end">
+          <li class="nav-item {% if request.path == '/' %}active{% endif %}">
+            <a class="nav-link" href=" {% url 'home' %}">
+              Home
+            </a>
+          </li>
+          <li class="nav-item {% if request.path == '/about/' %}active{% endif %}">
+            <a class="nav-link"class="button btn btn-common" href=" {% url 'about' %}">
+              About Us
+            </a>
+           
+            {% comment %} <ul class="dropdown-menu"> {% endcomment %}
+              {% comment %} <li><a class="dropdown-item" href="about.html">About</a></li> {% endcomment %}
+              {% comment %} <li><a class="dropdown-item" href="job-page.html">About Us</a></li> {% endcomment %}
+              {% comment %} <li><a class="dropdown-item" href="job-details.html">Join Us</a></li> {% endcomment %}
+              {% comment %} <li><a class="dropdown-item" href="resume.html">Resume Page</a></li> {% endcomment %}
+              {% comment %} <li><a class="dropdown-item" href="privacy-policy.html">Privacy Policy</a></li> {% endcomment %}
+              {% comment %} <li><a class="dropdown-item" href="faq.html">FAQ</a></li> {% endcomment %}
+              {% comment %} <li><a class="dropdown-item" href="pricing.html">Pricing Tables</a></li> {% endcomment %}
+              {% comment %} <li><a class="dropdown-item" href="contact.html">Contact</a></li> {% endcomment %}
+            {% comment %} </ul> {% endcomment %}
+          </li>
+          {% comment %} <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Join Us
+            </a>
+            <ul class="dropdown-menu"> {% endcomment %}
+              {% comment %} <li><a class="dropdown-item" href="browse-jobs.html">Browse Jobs</a></li> {% endcomment %}
+              {% comment %} <li><a class="dropdown-item" href="browse-categories.html">Browse Categories</a></li> {% endcomment %}
+              {% comment %} <li><a class="dropdown-item" href="add-resume.html">Add Resume</a></li> {% endcomment %}
+              {% comment %} <li><a class="dropdown-item" href="manage-resumes.html">Manage Resumes</a></li> {% endcomment %}
+              {% comment %} <li><a class="dropdown-item" href="job-alerts.html">Job Alerts</a></li> {% endcomment %}
+            {% comment %} </ul> {% endcomment %}
+          {% comment %} </li> {% endcomment %}
+          {% comment %} <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Employers
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="post-job.html">Add Job</a></li>
+              <li><a class="dropdown-item" href="manage-jobs.html">Manage Jobs</a></li>
+              <li><a class="dropdown-item" href="manage-applications.html">Manage Applications</a></li>
+              <li><a class="dropdown-item" href="browse-resumes.html">Browse Resumes</a></li>
+            </ul>
+          </li> {% endcomment %}
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              My Account 
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href=" {% url 'user_dashboard' %}">User</a></li>
+              <li><a class="dropdown-item" href=" {% url 'expert_dashboard' %}">Expert</a></li>
+              {% comment %} <li><a class="dropdown-item" href="blog-full-width.html"> Blog full width</a></li> {% endcomment %}
+              {% comment %} <li><a class="dropdown-item" href="single-post.html">Blog Single Post</a></li> {% endcomment %}
+            </ul>
+          </li>
+          <li class="nav-item {% if request.path == '/contact/' %}active{% endif %}">
+            <a class="nav-link"class="button btn btn-common" href=" {% url 'contact' %}">
+             Contact Us
+            </a>
+          </li>
+          <li class="nav-item {% if request.path == '/login/' %}active{% endif %}">
+            <a class="nav-link"class="button btn btn-common" href=" {% url 'login' %}">
+             Log In
+            </a>
+          </li>
+          <li class="nav-item {% if request.path == '/signup/' %}active{% endif %}">
+            <a class="nav-link"class="button btn btn-common" href=" {% url 'signup' %}">
+              Sign In</a>
+          </li>
+          {% comment %} <li class="button-group">
+            <a href="post-job.html" class="button btn btn-common">Post a Job</a>
+          </li> {% endcomment %}
         </ul>
       </div>
     </div>
-  </nav>
+  </div>
+  <div class="mobile-menu" data-logo="{% static 'img/logo-mobile.png' %}"></div>
+</nav>

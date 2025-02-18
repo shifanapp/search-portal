@@ -17,9 +17,28 @@ Including another URLconf
 from django.urls import path
 from . import views
 
+
 urlpatterns = [
-    path('experts/dashboard/', views.dashboard, name='dashboard'),
+    path('basic_info/', views.basic_info, name='basic_info'),
+    path('experts/dashboard/', views.dashboard, name='expert_dashboard'),
+    path('expert_profile/<int:user_id>/', views.expert_profile, name='expert_profile'),
+    path('ajax/load-cities/', views.load_cities, name='ajax_load_cities'),
+    path('get-services/<int:category_id>/', views.get_services, name='get_services'),
+    path('create-payment-intent/', views.create_payment_intent, name='create_payment_intent'),
+    path('payment-success/', views.payment_success, name='payment_success'),
+    #  path('create-payment-intent/', views.create_payment_intent, name='create_payment_intent'),
+    path('submit-user-details/', views.submit_user_details, name='submit_user_details'),
+    # path('payment-success/', views.payment_success, name='payment_success'),
+    path('ajax/check-username/', views.ajax_check_username, name='ajax_check_username'),
+    path('get-service-price/', views.get_service_price, name='get_service_price'),
+    # path('logout/', views.user_logout, name='logout')
+
+    path('logout/', views.logout_view, name='logout'),
+
 
 
 
 ]
+
+
+

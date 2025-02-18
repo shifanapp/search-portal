@@ -18,7 +18,7 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    path('user/dashboard/', views.dashboard, name='dashboard'),
+    path('user/dashboard/', views.dashboard, name='user_dashboard'),
 
 
 

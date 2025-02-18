@@ -33,20 +33,57 @@ body {
     height: 100px;
     margin-bottom: 10px;
   }
-  
-  .freelancer-card {
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    padding: 20px;
-    text-align: center;
+
+  /* Ensure Bootstrap grid system works properly */
+.row {
+  margin: 0; /* Remove any unwanted margins */
+}
+
+/* Freelancer card styling */
+.freelancer-card {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 20px;
+  text-align: center;
+  background: #fff; /* Add background for a clean look */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 250px; /* Ensures consistent card heights */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease-in-out;
+}
+
+.freelancer-card:hover {
+  transform: translateY(-5px); /* Hover effect */
+}
+
+/* Ensure image is centered & styled properly */
+.freelancer-card img {
+  border-radius: 50%;
+  width: 80px;
+  height: 80px;
+  margin-bottom: 10px;
+}
+
+/* Make sure the row wraps properly */
+@media (min-width: 768px) {
+  .row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
   }
-  
-  .freelancer-card img {
-    border-radius: 50%;
-    width: 80px;
-    height: 80px;
-    margin-bottom: 10px;
-  }
+}
+
+/* Fixes spacing and makes sure it fits correctly */
+.col-lg-4 {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+
   
   .subscribe-section {
     background-color: #f9eae0;
@@ -71,4 +108,137 @@ body {
     color: #fff;
   }
 
+.category-section {
+  padding: 50px 0;
+  background: linear-gradient(135deg, #ff9a9e, #fad0c4); /* Soft pink gradient */
+  text-align: center;
+}
+
+/* Category Cards */
+.category-card {
+  text-align: center;
+  padding: 15px;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease-in-out;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center; /* Center align content */
+  height: 180px; /* Adjust as needed */
+}
+
+
+/* Ensure spacing between rows */
+.col-6 {
+  margin-bottom: 15px; /* Adds space between category items */
+}
+
+/* Increase image size for better visibility */
+.category-card img {
+  width: 150px;  /* Adjust for mobile */
+  height: 150px;
+  object-fit: cover;
+  border-radius: 10px;
+  transition: transform 0.3s ease-in-out;
+}
+
+.category-card p {
+  font-size: 14px;
+  font-weight: bold;
+  color: #333;
+}
+
+/* Hover Effect */
+.category-card:hover {
+  transform: scale(1.05);
+
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+  /* background: linear-gradient(135deg, #007bff, #00c6ff); */
+  /* color: white; */
+}
+
+/* Different gradients for each category */
+/* .category-card:nth-child(1) { background: linear-gradient(135deg, #ff9a9e, #fad0c4); } Maintenance */
+/* .category-card:nth-child(2) { background: linear-gradient(135deg, #ff758c, #ff7eb3); } Digital Marketing */
+/* .category-card:nth-child(3) { background: linear-gradient(135deg, #76b2fe, #b69efe); } Writing & Translation */
+/* .category-card:nth-child(4) { background: linear-gradient(135deg, #48c6ef, #6f86d6); } Web Development */
+/* .category-card:nth-child(5) { background: linear-gradient(135deg, #ff9a9e, #fad0c4); } Software Development */
+
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .category-card {
+      height: 160px;
+  }
+
+  .category-card img {
+    width: 150px;
+    height: 150px;
+}
+
+  .col-6 {
+      display: flex;
+      justify-content: center; /* Center align items */
+  }
+  .category-card p {
+    font-size: 13px;
+}
+  .category-card:active {
+      transform: scale(1.05);
+      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+      transition: transform 0.2s ease-in-out;
+  }
+
+
+}
+
+ /* Ensure Bootstrap grid system works properly */
+ .row {
+  margin: 0; /* Remove any unwanted margins */
+}
+
+/* Freelancer card styling */
+.freelancer-card {
+border: 1px solid #ddd;
+border-radius: 8px;
+padding: 20px;
+text-align: center;
+background: #fff;
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: space-between;
+min-height: 250px;
+box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+transition: transform 0.3s ease-in-out;
+}
+
+.freelancer-card:hover {
+transform: translateY(-5px);
+}
+
+.freelancer-card img {
+border-radius: 50%;
+width: 80px;
+height: 80px;
+margin-bottom: 10px;
+}
+
+/* Ensure the row wraps properly */
+@media (min-width: 768px) {
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+}
+
+/* Fix card alignment */
+.col-lg-3 {
+display: flex;
+justify-content: center;
+margin-bottom: 20px;
+}
 
